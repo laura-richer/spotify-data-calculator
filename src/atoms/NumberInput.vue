@@ -1,3 +1,3 @@
 <template>
-  <p>Radio button</p>
+  <p>Number input</p>
 </template>

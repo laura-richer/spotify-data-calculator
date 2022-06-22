@@ -1,0 +1,44 @@
+@use 'sass:math';
+
+.btn {
+  $self: &;
+  @include border-outset;
+
+  background-color: $grey;
+  cursor: pointer;
+
+  &--primary {
+    padding: 0.8rem $spacer;
+    border-width: 5px;
+    font-size: 1.2rem;
+  }
+
+  &--compact {
+    font-size: 0.8rem;
+    padding: 0.4rem $spacer;
+    border-width: 3px;
+  }
+
+  &:hover,
+  &:focus {
+    @include border-inset;
+  }
+
+  &-focus--green {
+    &:focus {
+      color: $green
+    }
+  }
+
+  &-focus--blue {
+    &:focus {
+      color: $blue
+    }
+  }
+
+  &-focus--red {
+    &:focus {
+      color: $red
+    }
+  }
+}

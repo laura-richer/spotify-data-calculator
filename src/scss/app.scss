@@ -1,5 +1,25 @@
+@import './global/_variables';
+@import './global/mixins';
+@import './global/typography';
 
+@import './atoms/btn';
+
+@import './components/header';
+@import './components/streaming-quality';
+
+@import './views/main';
 
 html {
-  background-color: grey;
+  font-size: 10px;
+}
+
+body {
+  height: 100vh;
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  * {
+    font-family: Minesweeper, Arial, sans-serif;
+  }
 }

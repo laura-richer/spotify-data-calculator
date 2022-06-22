@@ -1,3 +1,0 @@
-<template>
-  <p>Radio button</p>
-</template>

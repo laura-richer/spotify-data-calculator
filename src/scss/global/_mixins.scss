@@ -1,0 +1,17 @@
+@use 'sass:math';
+
+@mixin border-inset() {
+  border-style: solid;
+  border-top-color: $shadow;
+  border-left-color: $shadow;
+  border-right-color: $highlight;
+  border-bottom-color: $highlight;
+}
+
+@mixin border-outset() {
+  border-style: solid;
+  border-top-color: $highlight;
+  border-left-color: $highlight;
+  border-right-color: $shadow;
+  border-bottom-color: $shadow;
+}

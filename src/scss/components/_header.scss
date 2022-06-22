@@ -1,0 +1,10 @@
+@use "sass:math";
+
+.header {
+  @include border-inset;
+
+  display: flex;
+  justify-content: center;
+  padding: $spacer * 1.5 $spacer * 2;
+  border-width: math.div($spacer, 2);
+}

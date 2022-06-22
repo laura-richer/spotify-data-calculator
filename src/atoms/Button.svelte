@@ -1,12 +1,7 @@
 <script lang="ts">
   export let btnText: string = 'Add button text';
-  export let btnType: string = 'button';
+  export let btnType: string = 'primary';
+  export let btnHoverColor: string = 'green';
 </script>
 
-<button on:click type={btnType}>{btnText}</button>
-
-<style lang="scss">
-  button {
-    background-color: red;
-  }
-</style>
+<button on:click class="btn btn--{btnType} btn-focus--{btnHoverColor}">{btnText}</button>

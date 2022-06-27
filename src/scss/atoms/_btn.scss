@@ -1,7 +1,7 @@
 @use 'sass:math';
 
 .btn {
-  $self: &;
+  $btn: &;
   @include border-outset;
 
   background-color: $grey;
@@ -20,24 +20,28 @@
   }
 
   &:hover,
-  &:focus {
+  &:focus,
+  &--active {
     @include border-inset;
   }
 
   &-focus--green {
-    &:focus {
+    &:focus,
+    &#{$btn}--active {
       color: $green
     }
   }
 
   &-focus--blue {
-    &:focus {
+    &:focus,
+    &#{$btn}--active {
       color: $blue
     }
   }
 
   &-focus--red {
-    &:focus {
+    &:focus,
+    &#{$btn}--active {
       color: $red
     }
   }

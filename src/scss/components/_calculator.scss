@@ -1,0 +1,9 @@
+.calculator {
+  background-color: $grey;
+  padding: $spacer;
+
+  &--disabled {
+    pointer-events: none;
+    opacity: 0.5;
+  }
+}

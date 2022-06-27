@@ -1,4 +1,9 @@
 .streaming-quality {
+  &__meta {
+    background-color: $grey;
+    padding: $spacer;
+  }
+
   &__options {
     display: grid;
     grid-template-columns: 1fr 1fr;

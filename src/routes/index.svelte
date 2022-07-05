@@ -2,8 +2,7 @@
   import '../scss/app.scss';
 
   import Button from '../atoms/Button.svelte';
-  import CalculateData from '../components/CalculateData.svelte';
-  import CalculateTime from '../components/CalculateTime.svelte';
+  import Calculator from '../components/Calculator.svelte';
   import SelectAudioQuality from '../components/SelectAudioQuality.svelte';
   import Header from '../components/Header.svelte';
 
@@ -11,11 +10,11 @@
     'time',
     'data'
   ];
-  let showCalculator: string;
+  let selectedCalculator: string;
   let audioQuality: number;
 
-  const handleClick = (calculatorType: string) => {
-    showCalculator = calculatorType;
+  const handleSelectCalculatorType = (calculatorType: string) => {
+    selectedCalculator = calculatorType;
   }
 
   const handleSelectAudioQuality = (event: CustomEvent<number>) => {
@@ -32,10 +31,10 @@
       <div class="main__selectors main__section">
         {#each calculatorTypes as calculatorType}
           <Button
-            on:click={() => handleClick(calculatorType)}
+            on:click={() => handleSelectCalculatorType(calculatorType)}
             btnHoverColor="green"
             btnText={`Calculate ${calculatorType}`}
-            active={calculatorType === showCalculator}/>
+            active={calculatorType === selectedCalculator}/>
         {/each}
       </div>
 
@@ -44,12 +43,8 @@
       </div>
 
       <div>
-        {#if showCalculator === 'data'}
-          <CalculateData audioQuality={audioQuality}/>
-        {/if}
-
-        {#if showCalculator === 'time'}
-          <CalculateTime audioQuality={audioQuality}/>
+        {#if selectedCalculator}
+          <Calculator audioQuality={audioQuality} calculatorType={selectedCalculator} />
         {/if}
       </div>
     </div>

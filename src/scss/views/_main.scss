@@ -17,13 +17,13 @@
     @include border-inset;
 
     text-align:center;
-    padding: $spacer * 1.5 $spacer * 2;
-    background: url(../assets/sweeper-grid.png) top -5px left 0;
+    padding: $spacer * 2;
+    background: url(../assets/sweeper-grid.png) top left;
     border-width: math.div($spacer, 2);
   }
 
   &__section {
-    margin-bottom: $spacer * 3;
+    margin-bottom: $spacer * 4;
   }
 
   &__selectors {

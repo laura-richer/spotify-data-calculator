@@ -1,16 +1,33 @@
 <script lang="ts">
+  import { createEventDispatcher } from 'svelte';
+  import Button from '../atoms/Button.svelte';
+  import Input from '../atoms/Input.svelte';
+
+  // Props
   export let audioQuality: number;
 
-  import Form from './Form.svelte';
+  // Variables
+  const dispatch = createEventDispatcher();
+  const timeIntro: string = 'How much time you would like to listen for? I will tell you how much mobile data you need.';
+  let days: string = '00';
+  let hours: string = '00';
+  let minutes: string = '00';
 
-  const timeIntro: string = 'Enter the amount of time you would like to listen for and I will tell you how much mobile data you need.';
-
-  const handleCalculateTime = (event: CustomEvent<number>) => {
-    const { detail } = event;
-    console.log(detail);
+  // Methods
+  const calculateTime = (days: string, hours: string, minutes: string) => {
+    console.log(audioQuality);
+    console.log(days);
+    console.log(hours);
+    console.log(minutes);
+    dispatch('result', `${days}, ${hours}, ${minutes}`);
   }
 </script>
 
-<div class="calculator" class:calculator--disabled={!audioQuality}>
-  <Form on:calculateResult={handleCalculateTime} name={'calculateTime'} label={timeIntro}/>
+<span>{timeIntro}</span>
+<div>
+  <Input fieldLabel={'days'} fieldName={'Days'} fieldDefaultValue={'00'}/>
+  <Input fieldLabel={'hours'} fieldName={'Hours'} fieldDefaultValue={'00'}/>
+  <Input fieldLabel={'minutes'} fieldName={'Minutes'} fieldDefaultValue={'00'}/>
 </div>
+<Button btnText={'Calculate'} on:click={() => calculateTime(days, hours, minutes)}/>
+

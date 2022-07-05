@@ -3,7 +3,6 @@
   import Button from '../atoms/Button.svelte';
 
   const dispatch = createEventDispatcher();
-
   const audioQualities = [
     {name: 'Low', value: 24},
     {name: 'Medium', value: 96},
@@ -14,7 +13,7 @@
 
   const handleClick = (selectedAudioQuality: number) => {
     currentAudioQuality = selectedAudioQuality;
-    dispatch('selectAudioQuality', selectedAudioQuality)
+    dispatch('selectAudioQuality', currentAudioQuality);
   }
 </script>
 

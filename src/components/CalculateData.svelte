@@ -1,17 +1,25 @@
 <script lang="ts">
+  import { createEventDispatcher } from 'svelte';
+
+  import Button from '../atoms/Button.svelte';
+  import Input from '../atoms/Input.svelte';
+
+  // Props
   export let audioQuality: number;
 
-  import Form from './Form.svelte';
+  // Variables
+  const dispatch = createEventDispatcher();
+  const dataIntro: string = 'How much data you have left? I will tell you how long you can listen for.';
+  let calculationInput: number;
 
-  const dataIntro: string = 'Enter the amount of mobile data you have left and I will tell you how long you can listen for';
-
-  const handleCalculateData = (event: CustomEvent<number>) => {
-    const { detail } = event;
-    console.log(detail);
+  // Methods
+  const calculateData = (input: number) => {
+    console.log(input);
+    console.log(audioQuality);
+    dispatch('result', input);
   }
 </script>
 
-<div class="calculator" class:calculator--disabled={!audioQuality}>
-  <Form on:calculateResult={handleCalculateData} name={'calculateData'} label={dataIntro}/>
-</div>
-
+<span>{dataIntro}</span>
+<Input fieldLabel={'gb'} fieldName={'GB'} fieldLabelPosition={'right'}/>
+<Button btnText={'Calculate'} on:click={() => calculateData(calculationInput)}/>

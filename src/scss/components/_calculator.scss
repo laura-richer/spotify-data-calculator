@@ -1,6 +1,23 @@
 .calculator {
+  display: flex;
+  flex-direction: column;
   background-color: $grey;
-  padding: $spacer;
+  padding: $spacer * 1.5;
+
+  & > * {
+    &:not(:last-child) {
+      margin-bottom: $spacer * 1.5;
+    }
+  }
+
+  label {
+    max-width: 300px;
+    margin: 0 auto;
+  }
+
+  input {
+    width: $spacer * 6;
+  }
 
   &--disabled {
     pointer-events: none;

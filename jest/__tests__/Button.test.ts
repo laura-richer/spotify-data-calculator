@@ -3,7 +3,7 @@
  */
 
 import "@testing-library/jest-dom";
-import Index from "../routes/index.svelte";
+import Index from "../../src/routes/index.svelte";
 import { render } from "@testing-library/svelte";
 
 describe("Test if Jest is working", () => {

@@ -13,7 +13,7 @@
 		"lint": "eslint './src/**/*.{js,ts,svelte}' && stylelint './src/**/*.{css,scss,svelte}' --custom-syntax postcss-scss",
 		"lint:fix": "eslint --fix './src/**/*.{js,ts,svelte}'",
 		"prelint": "npm run format",
-		"test": "jest",
+		"test": "jest --config=./jest/config/jest.config.cjs",
 		"test:watch": "npm run test -- --watchAll",
 		"test:coverage": "jest --coverage"
 	},

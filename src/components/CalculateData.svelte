@@ -1,27 +1,26 @@
 <script lang="ts">
-	import { createEventDispatcher } from 'svelte';
-
 	import Button from './Button.svelte';
+  import Calculator from './Calculator.svelte';
 	import Input from './Input.svelte';
 
 	// Props
 	export let audioQuality: number;
 
 	// Variables
-	const dispatch = createEventDispatcher();
 	let calculationInput: number;
+  let result: string;
 
 	// Methods
 	const calculateData = (input: number) => {
-		console.log(input);
-		console.log(audioQuality);
-		dispatch('result', input);
+		result = input ? input.toString() : '123';
 	};
 </script>
 
-<Input fieldLabel={'gb'} fieldName={'GB'} fieldLabelPosition={'right'} />
-<Button
-	btnText={'Calculate'}
-	btnHoverColor="red"
-	on:click={() => calculateData(calculationInput)}
-/>
+<Calculator isActive={audioQuality !== undefined} calculatorType='CalculateData' result={result}>
+  <Input fieldLabel={'gb'} fieldName={'GB'} fieldLabelPosition={'right'} />
+  <Button
+    btnText={'Calculate'}
+    btnHoverColor="red"
+    on:click={() => calculateData(calculationInput)}
+  />
+</Calculator>

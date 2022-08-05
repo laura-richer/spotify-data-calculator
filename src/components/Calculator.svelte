@@ -1,86 +1,80 @@
-<script lang="ts">
-	import Button from './Button.svelte';
-	import CalculateData from './CalculateData.svelte';
-	import CalculateTime from './CalculateTime.svelte';
+<script type="ts">
+  import Result from './Result.svelte';
 
-	// Props
-	export let audioQuality: number;
-	export let calculatorType: string;
+  // Props
+  export let calculatorType: string;
+  export let isActive: boolean = false;
+  export let result: string;
 
-	// Data
-	let result: string | null;
+  // Watchers
+  $: if (result) {
+    showCalculator = false;
+  }
 
-	// Methods
-	const handleDisplayResult = (event: CustomEvent<number>) => {
-		console.log(event.detail);
-		result = '123';
-	};
+  // Variables
+  const calculatorCopy: CalculatorCopyObject = {
+    CalculateTime: {
+      title: 'How much time you would like to listen for? I will tell you how much mobile data you need.',
+      resultTitle: 'Heres how long you can listen for',
+    },
+    CalculateData: {
+      title: 'How much data you have left? I will tell you how long you can listen for.',
+      resultTitle: 'Heres how much data you need',
+    },
+  };
+
+  const calculatorTypeString = calculatorType as string;
+  const calculatorTypeKey = calculatorTypeString as keyof CalculatorCopyObject;
+  let showCalculator: boolean = true;
+
+  const handleShowCalculator = (event: CustomEvent<boolean>) => {
+    const { detail } = event;
+    showCalculator = detail;
+  };
+
+  interface CalculatorTypeObject {
+    title: string;
+    resultTitle: string,
+  }
+
+  interface CalculatorCopyObject {
+    CalculateTime: CalculatorTypeObject;
+    CalculateData: CalculatorTypeObject;
+  }
 </script>
 
-<div class="calculator" class:calculator--disabled={!audioQuality}>
-	<span class="calculator__title">
-		{calculatorType === 'time'
-			? 'How much time you would like to listen for? I will tell you how much mobile data you need.'
-			: 'How much data you have left? I will tell you how long you can listen for.'}
-	</span>
+<div class="calculator" class:calculator--disabled={!isActive}>
+  <span class="calculator__title">{calculatorCopy[calculatorTypeKey].title}</span>
 
-	{#if !result}
-		<svelte:component
-			this={calculatorType === 'time' ? CalculateTime : CalculateData}
-			{audioQuality}
-			on:result={handleDisplayResult}
-		/>
-	{/if}
-
-	{#if result}
-		<div class="calculator__result">
-			<span class="calculator__result-title">
-				{calculatorType === 'time'
-					? 'Heres how long you can listen for'
-					: 'Heres how much data you need'}
-			</span>
-			<p>{result}</p>
-			<Button
-				btnText={'Restart'}
-				btnHoverColor="red"
-				on:click={() => {
-					result = null;
-				}}
-			/>
-		</div>
-	{/if}
+  {#if showCalculator}
+    <slot></slot>
+  {:else}
+    <Result on:handleReset={handleShowCalculator} result={result} title={calculatorCopy[calculatorTypeKey].resultTitle} />
+  {/if}
 </div>
 
 <style lang="scss">
-	@import '../scss/resources';
+@import '../scss/resources';
+.calculator {
+	display: flex;
+	flex-direction: column;
+	background-color: var(--color-grey);
+	padding: $spacer * 1.5;
 
-	.calculator {
-		display: flex;
-		flex-direction: column;
-		background-color: $grey;
-		padding: $spacer * 1.5;
-
-		& > * {
-			&:not(:last-child) {
-				margin-bottom: $spacer * 1.5;
-			}
-		}
-
-		&__title {
-			max-width: 300px;
-			margin: 0 auto;
-		}
-
-		&--disabled {
-			pointer-events: none;
-			opacity: 0.5;
-		}
-
-		&__result {
-			&-title {
-				display: block;
-				margin-bottom: $spacer;
-			}
+	& > * {
+		&:not(:last-child) {
+			margin-bottom: $spacer * 1.5;
 		}
 	}
+
+	&--disabled {
+		pointer-events: none;
+		opacity: 0.5;
+	}
+
+  &__title {
+		max-width: 300px;
+		margin: 0 auto;
+	}
+}
 </style>

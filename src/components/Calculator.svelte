@@ -55,26 +55,27 @@
 
 <style lang="scss">
 @import '../scss/resources';
+
 .calculator {
-	display: flex;
-	flex-direction: column;
-	background-color: var(--color-grey);
-	padding: $spacer * 1.5;
+  display: flex;
+  flex-direction: column;
+  padding: $spacer * 1.5;
+  background-color: var(--color-grey);
 
-	& > * {
-		&:not(:last-child) {
-			margin-bottom: $spacer * 1.5;
-		}
-	}
+  & > * {
+    &:not(:last-child) {
+      margin-bottom: $spacer * 1.5;
+    }
+  }
 
-	&--disabled {
-		pointer-events: none;
-		opacity: 0.5;
-	}
+  &--disabled {
+    opacity: 0.5;
+    pointer-events: none;
+  }
 
   &__title {
-		max-width: 300px;
-		margin: 0 auto;
-	}
+    max-width: 300px;
+    margin: 0 auto;
+  }
 }
 </style>

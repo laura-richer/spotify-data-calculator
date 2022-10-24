@@ -14,67 +14,68 @@
 @import '../scss/resources';
 
 .btn {
-	$btn: &;
-	@include border-outset;
+  $btn: &;
+  @include border-outset;
 
-	position: relative;
-	background-color: var(--color-grey);
-	cursor: pointer;
 
-	&:hover,
-	&:focus,
-	&--active {
-		@include border-inset;
-	}
+  position: relative;
+  background-color: var(--color-grey);
+  cursor: pointer;
 
-	&--active {
-		&:after {
-			position: absolute;
-			top: 1rem;
-			right: 1rem;
-			width: 11px;
-			height: 15px;
-			background: url(../assets/images/flag.png) center center no-repeat;
-			content: '';
-		}
-	}
+  &:hover,
+  &:focus,
+  &--active {
+    @include border-inset;
+  }
 
-	&--primary {
-		padding: 0.8rem $spacer;
-		border-width: 5px;
-		font-size: 1.2rem;
-	}
+  &--active {
+    &::after {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      width: 11px;
+      height: 15px;
+      background: url(../assets/images/flag.png) center center no-repeat;
+      content: '';
+    }
+  }
 
-	&--compact {
-		font-size: 0.8rem;
-		padding: 0.7rem $spacer;
-		border-width: 3px;
+  &--primary {
+    padding: 0.8rem $spacer;
+    border-width: 5px;
+    font-size: 1.2rem;
+  }
 
-		&:after {
-			top: $spacer * 0.5;
-		}
-	}
+  &--compact {
+    padding: 0.7rem $spacer;
+    border-width: 3px;
+    font-size: 0.8rem;
+
+    &::after {
+      top: $spacer * 0.5;
+    }
+  }
 
   // TODO refactor to use css variables like blueprint
-	&-focus--green {
-		&:focus,
-		&#{$btn}--active {
-			color: var(--color-green);
-		}
-	}
+  &-focus--green {
+    &:focus,
+    &#{$btn}--active {
+      color: var(--color-green);
+    }
+  }
 
-	&-focus--blue {
-		&:focus,
-		&#{$btn}--active {
-			color: var(--color-blue);
-		}
-	}
+  &-focus--blue {
+    &:focus,
+    &#{$btn}--active {
+      color: var(--color-blue);
+    }
+  }
 
-	&-focus--red {
-		&:focus,
-		&#{$btn}--active {
-			color: var(--color-red);
-		}
-	}
+  &-focus--red {
+    &:focus,
+    &#{$btn}--active {
+      color: var(--color-red);
+    }
+  }
 }
 </style>

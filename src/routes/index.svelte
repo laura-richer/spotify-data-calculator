@@ -42,29 +42,29 @@
 @import '../scss/resources';
 
 .main {
-	height: 100%;
-	background-color: var(--color-grey);
+  height: 100%;
+  background-color: var(--color-grey);
 
-	&__wrapper {
-		display: flex;
-		justify-content: center;
-		flex-direction: column;
-		width: 450px;
-		max-width: 90%;
-		margin: 0 auto;
-	}
+  &__wrapper {
+    display: flex;
+    width: 450px;
+    max-width: 90%;
+    flex-direction: column;
+    justify-content: center;
+    margin: 0 auto;
+  }
 
-	&__container {
-		@include border-inset;
+  &__container {
+    @include border-inset;
 
-		text-align: center;
-		padding: $spacer * 2;
-		background: url(../assets/images/sweeper-grid.png) top left;
-		border-width: math.div($spacer, 2);
-	}
+    padding: $spacer * 2;
+    border-width: math.div($spacer, 2);
+    background: url(../assets/images/sweeper-grid.png) top left;
+    text-align: center;
+  }
 
-	&__block {
-		margin-bottom: $spacer * 4;
-	}
+  &__block {
+    margin-bottom: $spacer * 4;
+  }
 }
 </style>

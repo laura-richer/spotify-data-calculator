@@ -39,14 +39,14 @@
 @import '../scss/resources';
 
 .select-audio-quality {
-	&__meta {
-		background-color: var(--color-grey);
-		padding: $spacer * 1.5;
-	}
+  &__meta {
+    padding: $spacer * 1.5;
+    background-color: var(--color-grey);
+  }
 
-	&__options {
-		display: grid;
-		grid-template-columns: 1fr 1fr;
-	}
+  &__options {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
 }
 </style>

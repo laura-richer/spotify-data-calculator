@@ -2,16 +2,12 @@
 
 @mixin border-inset() {
   border-style: solid;
-  border-top-color: var(--color-shadow);
-  border-left-color: var(--color-shadow);
-  border-right-color: var(--color-highlight);
-  border-bottom-color: var(--color-highlight);
+  border-color: var(--color-shadow) var(--color-highlight) var(--color-highlight)
+    var(--color-shadow);
 }
 
 @mixin border-outset() {
   border-style: solid;
-  border-top-color: var(--color-highlight);
-  border-left-color: var(--color-highlight);
-  border-right-color: var(--color-shadow);
-  border-bottom-color: var(--color-shadow);
+  border-color: var(--color-highlight) var(--color-shadow) var(--color-shadow)
+    var(--color-highlight);
 }

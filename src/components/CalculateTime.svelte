@@ -32,8 +32,8 @@
 </Calculator>
 
 <style lang="scss">
-	.calculate-time {
-		display: flex;
-		justify-content: center;
-	}
+  .calculate-time {
+    display: flex;
+    justify-content: center;
+  }
 </style>

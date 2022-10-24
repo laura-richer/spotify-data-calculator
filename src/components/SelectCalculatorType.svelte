@@ -30,8 +30,8 @@
 <style lang="scss">
 .select-calculator-type {
   display: flex;
-  justify-content: center;
   flex-direction: column;
+  justify-content: center;
 }
 </style>
 

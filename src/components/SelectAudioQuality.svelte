@@ -2,19 +2,24 @@
   import { createEventDispatcher } from 'svelte';
   import Button from './Button.svelte';
 
+  interface AudioQualityObject {
+    name: string;
+    value : number,
+  }
+
   const dispatch = createEventDispatcher();
-  const audioQualities = [
-    {name: 'Low', value: 24},
-    {name: 'Medium', value: 96},
-    {name: 'High', value: 160},
-    {name: 'Very high', value: 320}
-  ]
+  const audioQualities:AudioQualityObject[] = [
+    { name: 'Low', value: 24 },
+    { name: 'Medium', value: 96 },
+    { name: 'High', value: 160 },
+    { name: 'Very high', value: 320 },
+  ];
   let currentAudioQuality: number;
 
   const handleSelectAudioQuality = (selectedAudioQuality: number) => {
     currentAudioQuality = selectedAudioQuality;
     dispatch('selectAudioQuality', currentAudioQuality);
-  }
+  };
 </script>
 
 <div class="select-audio-quality">
@@ -28,9 +33,9 @@
       <Button
         on:click={() => handleSelectAudioQuality(audioQuality.value)}
         active={currentAudioQuality === audioQuality.value}
-        btnHoverColor="blue"
-        btnType="compact"
-        btnText={audioQuality.name}/>
+        buttonHoverColor="blue"
+        buttonType="compact"
+        buttonText={audioQuality.name}/>
     {/each}
   </div>
 </div>
@@ -39,14 +44,14 @@
 @import '../scss/resources';
 
 .select-audio-quality {
-	&__meta {
-		background-color: var(--color-grey);
-		padding: $spacer * 1.5;
-	}
+  &__meta {
+    padding: $spacer * 1.5;
+    background-color: var(--color-grey);
+  }
 
-	&__options {
-		display: grid;
-		grid-template-columns: 1fr 1fr;
-	}
+  &__options {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
 }
 </style>

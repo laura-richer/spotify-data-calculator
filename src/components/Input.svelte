@@ -2,8 +2,8 @@
 	// Props
 	export let fieldLabel: string;
 	export let fieldName: string;
-	export let fieldDefaultValue: string = '';
-	export let fieldLabelPosition: string = 'top';
+	export let fieldDefaultValue = '';
+	export let fieldLabelPosition = 'top';
 
 	// Variables
 	let fieldValue: string = fieldDefaultValue;
@@ -15,34 +15,34 @@
 </div>
 
 <style lang="scss">
-	@use 'sass:math';
-	@import '../scss/resources';
+  @use 'sass:math';
+  @import '../scss/resources';
 
-	.input {
-		$input: &;
+  .input {
+    $input: &;
 
-		margin: 0 math.div($spacer, 2);
+    margin: 0 math.div($spacer, 2);
 
-		&--top {
-			#{$input}__label {
-				display: block;
-				margin-bottom: math.div($spacer, 2);
-			}
-		}
+    &--top {
+      #{$input}__label {
+        display: block;
+        margin-bottom: math.div($spacer, 2);
+      }
+    }
 
-		&--right {
-			display: flex;
-			flex-direction: row-reverse;
-			justify-content: center;
-			align-items: center;
+    &--right {
+      display: flex;
+      flex-direction: row-reverse;
+      align-items: center;
+      justify-content: center;
 
-			#{$input}__label {
-				margin-left: math.div($spacer, 2);
-			}
-		}
+      #{$input}__label {
+        margin-left: math.div($spacer, 2);
+      }
+    }
 
-		&__text {
-			width: $spacer * 6;
-		}
-	}
+    &__text {
+      width: $spacer * 6;
+    }
+  }
 </style>

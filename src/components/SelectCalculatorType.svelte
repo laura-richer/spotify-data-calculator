@@ -1,6 +1,6 @@
 <script lang="ts">
   import { createEventDispatcher } from 'svelte';
-  import Button from '../components/Button.svelte';
+  import Button from './Button.svelte';
 
   // Variables
   const dispatch = createEventDispatcher();
@@ -13,15 +13,15 @@
     selectedCalculatorType = calculatorType;
 
     dispatch('selectCalculator', selectedCalculatorComponentName);
-	};
+};
 </script>
 
 <div class="select-calculator-type">
   {#each calculatorTypes as calculatorType}
     <Button
       on:click={() => handleSelectCalculatorType(calculatorType)}
-      btnHoverColor="green"
-      btnText={`Calculate ${calculatorType}`}
+      buttonHoverColor="green"
+      buttonText={`Calculate ${calculatorType}`}
       active={calculatorType === selectedCalculatorType}
     />
   {/each}
@@ -30,8 +30,8 @@
 <style lang="scss">
 .select-calculator-type {
   display: flex;
-  justify-content: center;
   flex-direction: column;
+  justify-content: center;
 }
 </style>
 

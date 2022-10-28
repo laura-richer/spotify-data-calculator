@@ -1,15 +1,21 @@
 <script type="ts">
   import Result from './Result.svelte';
 
+  // Type declerations
+  interface CalculatorTypeObject {
+    title: string;
+    resultTitle: string,
+  }
+
+  interface CalculatorCopyObject {
+    CalculateTime: CalculatorTypeObject;
+    CalculateData: CalculatorTypeObject;
+  }
+
   // Props
   export let calculatorType: string;
-  export let isActive: boolean = false;
+  export let isActive = false;
   export let result: string;
-
-  // Watchers
-  $: if (result) {
-    showCalculator = false;
-  }
 
   // Variables
   const calculatorCopy: CalculatorCopyObject = {
@@ -23,23 +29,18 @@
     },
   };
 
-  const calculatorTypeString = calculatorType as string;
+  const calculatorTypeString = calculatorType;
   const calculatorTypeKey = calculatorTypeString as keyof CalculatorCopyObject;
-  let showCalculator: boolean = true;
+  let showCalculator = true;
 
   const handleShowCalculator = (event: CustomEvent<boolean>) => {
     const { detail } = event;
     showCalculator = detail;
   };
 
-  interface CalculatorTypeObject {
-    title: string;
-    resultTitle: string,
-  }
-
-  interface CalculatorCopyObject {
-    CalculateTime: CalculatorTypeObject;
-    CalculateData: CalculatorTypeObject;
+  // Watchers
+  $: if (result) {
+    showCalculator = false;
   }
 </script>
 
@@ -55,26 +56,27 @@
 
 <style lang="scss">
 @import '../scss/resources';
+
 .calculator {
-	display: flex;
-	flex-direction: column;
-	background-color: var(--color-grey);
-	padding: $spacer * 1.5;
+  display: flex;
+  flex-direction: column;
+  padding: $spacer * 1.5;
+  background-color: var(--color-grey);
 
-	& > * {
-		&:not(:last-child) {
-			margin-bottom: $spacer * 1.5;
-		}
-	}
+  & > * {
+    &:not(:last-child) {
+      margin-bottom: $spacer * 1.5;
+    }
+  }
 
-	&--disabled {
-		pointer-events: none;
-		opacity: 0.5;
-	}
+  &--disabled {
+    opacity: 0.5;
+    pointer-events: none;
+  }
 
   &__title {
-		max-width: 300px;
-		margin: 0 auto;
-	}
+    max-width: 300px;
+    margin: 0 auto;
+  }
 }
 </style>

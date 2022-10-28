@@ -1,15 +1,21 @@
 <script type="ts">
   import Result from './Result.svelte';
 
+  // Type declerations
+  interface CalculatorTypeObject {
+    title: string;
+    resultTitle: string,
+  }
+
+  interface CalculatorCopyObject {
+    CalculateTime: CalculatorTypeObject;
+    CalculateData: CalculatorTypeObject;
+  }
+
   // Props
   export let calculatorType: string;
-  export let isActive: boolean = false;
+  export let isActive = false;
   export let result: string;
-
-  // Watchers
-  $: if (result) {
-    showCalculator = false;
-  }
 
   // Variables
   const calculatorCopy: CalculatorCopyObject = {
@@ -23,23 +29,18 @@
     },
   };
 
-  const calculatorTypeString = calculatorType as string;
+  const calculatorTypeString = calculatorType;
   const calculatorTypeKey = calculatorTypeString as keyof CalculatorCopyObject;
-  let showCalculator: boolean = true;
+  let showCalculator = true;
 
   const handleShowCalculator = (event: CustomEvent<boolean>) => {
     const { detail } = event;
     showCalculator = detail;
   };
 
-  interface CalculatorTypeObject {
-    title: string;
-    resultTitle: string,
-  }
-
-  interface CalculatorCopyObject {
-    CalculateTime: CalculatorTypeObject;
-    CalculateData: CalculatorTypeObject;
+  // Watchers
+  $: if (result) {
+    showCalculator = false;
   }
 </script>
 

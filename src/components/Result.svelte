@@ -4,7 +4,7 @@
 
   // props
   export let result: string | number = '';
-  export let title: string = '';
+  export let title = '';
 
   // Variables
   const dispatch = createEventDispatcher();
@@ -14,8 +14,8 @@
   <p class="result__title">{title}</p>
   <p class="result__value">{result}</p>
   <Button
-    btnText={'Restart'}
-    btnHoverColor="red"
+    buttonText={'Restart'}
+    buttonHoverColor="red"
     on:click={() => dispatch('handleReset', true)}
   />
 </div>

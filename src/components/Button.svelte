@@ -1,12 +1,12 @@
 <script lang="ts">
-	export let active: boolean = false;
-	export let btnText: string = 'Add button text';
-	export let btnType: string = 'primary';
-	export let btnHoverColor: string = 'green';
+	export let active = false;
+	export let buttonText = 'Add button text';
+	export let buttonType = 'primary';
+	export let buttonHoverColor = 'green';
 </script>
 
-<button on:click class="btn btn--{btnType} btn-focus--{btnHoverColor}" class:btn--active={active}
-	>{btnText}</button
+<button on:click class="btn btn--{buttonType} btn-focus--{buttonHoverColor}" class:btn--active={active}
+	>{buttonText}</button
 >
 
 <style lang="scss">

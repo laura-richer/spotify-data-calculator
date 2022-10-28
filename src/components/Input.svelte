@@ -2,8 +2,8 @@
 	// Props
 	export let fieldLabel: string;
 	export let fieldName: string;
-	export let fieldDefaultValue: string = '';
-	export let fieldLabelPosition: string = 'top';
+	export let fieldDefaultValue = '';
+	export let fieldLabelPosition = 'top';
 
 	// Variables
 	let fieldValue: string = fieldDefaultValue;

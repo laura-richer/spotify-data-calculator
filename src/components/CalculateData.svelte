@@ -12,15 +12,15 @@
 
 	// Methods
 	const calculateData = (input: number) => {
-		result = input ? input.toString() : '123';
+	  result = input ? input.toString() : '123';
 	};
 </script>
 
 <Calculator isActive={audioQuality !== undefined} calculatorType='CalculateData' result={result}>
   <Input fieldLabel={'gb'} fieldName={'GB'} fieldLabelPosition={'right'} />
   <Button
-    btnText={'Calculate'}
-    btnHoverColor="red"
+    buttonText={'Calculate'}
+    buttonHoverColor="red"
     on:click={() => calculateData(calculationInput)}
   />
 </Calculator>

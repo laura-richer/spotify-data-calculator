@@ -7,15 +7,14 @@
 	export let audioQuality: number;
 
 	// Variables
-	let days: string = '00';
-	let hours: string = '00';
-	let minutes: string = '00';
+	const days = '00';
+	const hours = '00';
+	const minutes = '00';
   let result: string;
 
 	// Methods
-	const calculateTime = (days: string, hours: string, minutes: string) => {
-    result = `${days}, ${hours}, ${minutes}`;
-	};
+	const calculateTime = (selectedDays: string, selectedHours: string, selectedMinutes: string) => result = `${selectedDays}, ${selectedHours}, ${selectedMinutes}`;
+
 </script>
 
 <Calculator isActive={audioQuality !== undefined} calculatorType='CalculateTime' result={result}>
@@ -25,8 +24,8 @@
     <Input fieldLabel={'minutes'} fieldName={'Minutes'} fieldDefaultValue={'00'} />
   </div>
   <Button
-    btnText={'Calculate'}
-    btnHoverColor="red"
+    buttonText={'Calculate'}
+    buttonHoverColor="red"
     on:click={() => calculateTime(days, hours, minutes)}
   />
 </Calculator>

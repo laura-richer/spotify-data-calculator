@@ -1,13 +1,13 @@
 <script lang="ts">
-  import CalculateData from '../components/CalculateData.svelte';
-	import CalculateTime from '../components/CalculateTime.svelte';
-  import Header from '../components/Header.svelte';
-	import SelectAudioQuality from '../components/SelectAudioQuality.svelte';
-  import SelectCalculatorType from '../components/SelectCalculatorType.svelte';
+  import CalculateData from './components/CalculateData.svelte';
+  import CalculateTime from './components/CalculateTime.svelte';
+  import Header from './components/Header.svelte';
+  import SelectAudioQuality from './components/SelectAudioQuality.svelte';
+  import SelectCalculatorType from './components/SelectCalculatorType.svelte';
 
-  import '../scss/global.scss';
+  import './scss/global.scss';
 
-	let audioQuality: number;
+  let audioQuality: number;
   let selectedCalculator: string;
 
   const handleSelectAudioQuality = (event: CustomEvent<number>) => audioQuality = event.detail;
@@ -39,7 +39,7 @@
 
 <style lang="scss">
 @use 'sass:math';
-@import '../scss/resources';
+@import './scss/resources';
 
 .main {
   height: 100%;
@@ -60,7 +60,7 @@
 
     padding: $spacer * 2;
     border-width: math.div($spacer, 2);
-    background: url(../assets/images/sweeper-grid.png) top left;
+    background: url(./assets/images/sweeper-grid.png) top left;
     text-align: center;
   }
 

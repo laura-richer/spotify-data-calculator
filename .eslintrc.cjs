@@ -65,5 +65,5 @@ module.exports = {
     'svelte3/typescript': require('typescript'),
   },
   plugins: ['svelte3', '@typescript-eslint', 'jest', 'sonarjs'],
-  ignorePatterns: ['*.cjs', '*.config.js', 'node_modules', '*.d.ts'],
+  ignorePatterns: ['*.cjs', '*.config.js', '*.config.ts', 'node_modules', '*.d.ts'],
 }

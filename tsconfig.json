@@ -12,10 +12,10 @@
 	},
   "include": [
     "src/**/*.d.ts",
-    "src/**/*.ts",
     "src/**/*.js",
     "src/**/*.svelte",
-    "jest/config/jest-setup.ts"
+    "src/**/*.ts",
+    "test/**/*.ts"
   ],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

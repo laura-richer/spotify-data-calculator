@@ -1,0 +1,7 @@
+// Vitest Snapshot v1
+
+exports[`Button component > renders to match snapshot 1`] = `[Function]`;
+
+exports[`Counter component > renders to match snapshot 1`] = `[Function]`;
+
+exports[`renders to match snapshot 1`] = `[Function]`;

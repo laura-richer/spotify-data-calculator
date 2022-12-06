@@ -2,10 +2,10 @@
 	export let active = false;
 	export let buttonText = 'Add button text';
 	export let buttonType = 'primary';
-	export let buttonHoverColor = 'green';
+	export let buttonActiveColor = 'green';
 </script>
 
-<button on:click class="btn btn--{buttonType} btn-focus--{buttonHoverColor}" class:btn--active={active}
+<button on:click class="btn btn--{buttonType} btn-focus--{buttonActiveColor}" class:btn--active={active}
 	>{buttonText}</button
 >
 

@@ -15,7 +15,7 @@
   <p class="result__value">{result}</p>
   <Button
     buttonText={'Restart'}
-    buttonHoverColor="red"
+    buttonActiveColor="red"
     on:click={() => dispatch('handleReset', true)}
   />
 </div>

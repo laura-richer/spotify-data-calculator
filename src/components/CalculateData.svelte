@@ -20,7 +20,7 @@
   <Input fieldLabel={'gb'} fieldName={'GB'} fieldLabelPosition={'right'} />
   <Button
     buttonText={'Calculate'}
-    buttonHoverColor="red"
+    buttonActiveColor="red"
     on:click={() => calculateData(calculationInput)}
   />
 </Calculator>

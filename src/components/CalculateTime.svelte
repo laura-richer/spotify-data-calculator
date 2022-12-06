@@ -25,7 +25,7 @@
   </div>
   <Button
     buttonText={'Calculate'}
-    buttonHoverColor="red"
+    buttonActiveColor="red"
     on:click={() => calculateTime(days, hours, minutes)}
   />
 </Calculator>

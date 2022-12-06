@@ -33,7 +33,7 @@
       <Button
         on:click={() => handleSelectAudioQuality(audioQuality.value)}
         active={currentAudioQuality === audioQuality.value}
-        buttonHoverColor="blue"
+        buttonActiveColor="blue"
         buttonType="compact"
         buttonText={audioQuality.name}/>
     {/each}

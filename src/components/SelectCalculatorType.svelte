@@ -20,7 +20,7 @@
   {#each calculatorTypes as calculatorType}
     <Button
       on:click={() => handleSelectCalculatorType(calculatorType)}
-      buttonHoverColor="green"
+      buttonActiveColor="green"
       buttonText={`Calculate ${calculatorType}`}
       active={calculatorType === selectedCalculatorType}
     />

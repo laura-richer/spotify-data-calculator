@@ -7,6 +7,10 @@
     value : number,
   }
 
+  // Props
+  export let resetSelectedAudioQuality: number;
+
+  // Variables
   const dispatch = createEventDispatcher();
   const audioQualities:AudioQualityObject[] = [
     { name: 'Low', value: 24 },
@@ -16,10 +20,17 @@
   ];
   let currentAudioQuality: number;
 
+  // Methods
   const handleSelectAudioQuality = (selectedAudioQuality: number) => {
     currentAudioQuality = selectedAudioQuality;
     dispatch('selectAudioQuality', currentAudioQuality);
   };
+
+  $: {
+    if (resetSelectedAudioQuality === 0) {
+      currentAudioQuality = 0;
+    }
+  }
 </script>
 
 <div class="select-audio-quality">
@@ -33,7 +44,7 @@
       <Button
         on:click={() => handleSelectAudioQuality(audioQuality.value)}
         active={currentAudioQuality === audioQuality.value}
-        buttonActiveColor="blue"
+        buttonHoverColor="blue"
         buttonType="compact"
         buttonText={audioQuality.name}/>
     {/each}

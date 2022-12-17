@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { createEventDispatcher } from 'svelte';
+
 	// Props
 	export let fieldLabel: string;
 	export let fieldName: string;
@@ -6,12 +8,28 @@
 	export let fieldLabelPosition = 'top';
 
 	// Variables
+  const dispatch = createEventDispatcher();
 	let fieldValue: string = fieldDefaultValue;
+
+  // Methods
+  const onValueChange = (value: string) => dispatch('inputChange', {value, fieldLabel});
+  const onFieldFocus = () => {
+    fieldValue = '';
+    dispatch('inputChange', {fieldValue, fieldLabel})
+  }
 </script>
 
 <div class="input input--{fieldLabelPosition}">
 	<label class="input__label" for={fieldLabel}>{fieldName}</label>
-	<input class="input__text" name={fieldLabel} type="number" min="0" bind:value={fieldValue} />
+	<input
+    class="input__text"
+    name={fieldLabel}
+    type="number"
+    min="0"
+    bind:value={fieldValue}
+    on:input={() => onValueChange(fieldValue)}
+    on:focus={() => onFieldFocus()}
+  />
 </div>
 
 <style lang="scss">

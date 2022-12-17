@@ -3,7 +3,7 @@ import { render, screen, fireEvent } from "@testing-library/svelte";
 import Button from '../../src/components/Button.svelte';
 
 const buttonText = 'Test button';
-const buttonActiveColor = 'red';
+const buttonHoverColor = 'red';
 
 describe('Button component', function () {
   it('renders to match snapshot', () => {
@@ -35,7 +35,7 @@ describe('Button component', function () {
     const button = screen.getByText(buttonText);
 
     expect(button).toHaveClass('btn');
-    expect(button).toHaveClass('btn-focus--green');
+    expect(button).toHaveClass('btn-hover--green');
   });
 
   it('should not have active class by default', () => {
@@ -46,12 +46,12 @@ describe('Button component', function () {
   });
 
   it('should render correct classes with props', () => {
-    render(Button, { buttonText, buttonActiveColor, buttonType: 'compact' });
+    render(Button, { buttonText, buttonHoverColor, buttonType: 'compact' });
     const button = screen.getByText(buttonText);
 
     expect(button).toHaveClass('btn');
     expect(button).toHaveClass('btn--compact');
-    expect(button).toHaveClass(`btn-focus--${buttonActiveColor}`);
+    expect(button).toHaveClass(`btn-hover--${buttonHoverColor}`);
     expect(button.innerHTML).toBe(buttonText);
   });
 
@@ -64,11 +64,11 @@ describe('Button component', function () {
   });
 
   // it('should have a colour variable to match the active prop color', () => {
-  //   render(Button, { buttonText, buttonActiveColor, active: true });
+  //   render(Button, { buttonText, buttonHoverColor, active: true });
   //   const button = screen.getByText(buttonText);
 
-  //   expect(button).toHaveClass(`btn-focus--${buttonActiveColor}`);
-  //   expect(button).toHaveStyle(`color: var(--color-${buttonActiveColor})`);
+  //   expect(button).toHaveClass(`btn-focus--${buttonHoverColor}`);
+  //   expect(button).toHaveStyle(`color: var(--color-${buttonHoverColor})`);
   // });
 
   // it('should emit click when clicked', async () => {

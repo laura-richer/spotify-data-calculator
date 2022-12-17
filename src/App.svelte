@@ -1,6 +1,5 @@
 <script lang="ts">
-  import CalculateData from './components/CalculateData.svelte';
-  import CalculateTime from './components/CalculateTime.svelte';
+  import Calculator from './components/calculator/Calculator.svelte';
   import Header from './components/Header.svelte';
   import SelectAudioQuality from './components/SelectAudioQuality.svelte';
   import SelectCalculatorType from './components/SelectCalculatorType.svelte';
@@ -12,6 +11,10 @@
 
   const handleSelectAudioQuality = (event: CustomEvent<number>) => audioQuality = event.detail;
   const handleSelectCalculatorType = (event: CustomEvent<string>) => selectedCalculator = event.detail;
+  const handleReset = () => {
+    audioQuality = 0;
+    selectedCalculator = '';
+  }
 </script>
 
 <div class="main">
@@ -20,18 +23,15 @@
 
 		<div class="main__container">
 			<div class="main__block">
-        <SelectCalculatorType on:selectCalculator={handleSelectCalculatorType} />
+        <SelectCalculatorType on:selectCalculator={handleSelectCalculatorType} resetSelectedCalculator="{selectedCalculator}" />
 			</div>
 
 			<div class="main__block">
-				<SelectAudioQuality on:selectAudioQuality={handleSelectAudioQuality} />
+				<SelectAudioQuality on:selectAudioQuality={handleSelectAudioQuality} resetSelectedAudioQuality={audioQuality} />
 			</div>
 
       {#if selectedCalculator}
-        <svelte:component
-          this={selectedCalculator === 'CalculateTime' ? CalculateTime : CalculateData}
-          audioQuality={audioQuality}
-        />
+        <Calculator audioQuality={audioQuality} calculatorType={selectedCalculator} on:reset={handleReset} />
 			{/if}
 		</div>
 	</div>

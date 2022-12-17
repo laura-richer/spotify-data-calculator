@@ -1,13 +1,19 @@
 <script lang="ts">
 	export let active = false;
+  export let buttonDisabled = false;
 	export let buttonText = 'Add button text';
 	export let buttonType = 'primary';
-	export let buttonActiveColor = 'green';
+  export let buttonHoverColor: string;
 </script>
 
-<button on:click class="btn btn--{buttonType} btn-focus--{buttonActiveColor}" class:btn--active={active}
-	>{buttonText}</button
+<button
+  on:click
+  class="btn btn--{buttonType} btn-hover--{buttonHoverColor}"
+  class:btn--active={active}
+  class:btn--disabled={buttonDisabled}
 >
+  {buttonText}
+</button>
 
 <style lang="scss">
 @use 'sass:math';
@@ -57,25 +63,33 @@
   }
 
   // TODO refactor to use css variables like blueprint
-  &-focus--green {
-    &:focus,
+  &-hover--green {
+    &:hover,
     &#{$btn}--active {
       color: var(--color-green);
     }
   }
 
-  &-focus--blue {
-    &:focus,
+  &-hover--blue {
+    &:hover,
     &#{$btn}--active {
       color: var(--color-blue);
     }
   }
 
-  &-focus--red {
-    &:focus,
+  &-hover--red {
+    &:hover,
     &#{$btn}--active {
       color: var(--color-red);
     }
+  }
+
+  &--disabled {
+    @include border-inset;
+
+    cursor: pointer;
+    opacity: 0.2;
+    pointer-events: none;
   }
 }
 </style>

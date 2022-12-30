@@ -6,26 +6,27 @@
 	import Input from '../Input.svelte';
 
   interface CalculationInputObject {
-    days: number;
-    hours: number,
-    minutes: number
+    [key: string]: string;
+    days: string;
+    hours: string;
+    minutes: string;
   }
 
 	// Props
-  const dispatch = createEventDispatcher();
+  const dispatch = createEventDispatcher<{hasResult: { value: string, title: string }}>();
 	export let audioQuality: number;
 
 	// Variables
   const resultTitle = 'Heres how long you can listen for';
-	const calculationInput:CalculationInputObject = {
-    days: 0,
-    hours: 0,
-    minutes: 0,
+	const calculationInput: CalculationInputObject = {
+    days: '00',
+    hours: '00',
+    minutes: '00',
   };
   let result: string;
 
 	// Methods
-  const handleInputChange = (event: CustomEvent<object>) => {
+  const handleInputChange = (event: CustomEvent<{value: string, fieldLabel: string}>) => {
     const { value, fieldLabel } = event.detail;
     calculationInput[fieldLabel] = value;
   }
@@ -47,9 +48,8 @@
   <Input fieldLabel={'hours'} fieldName={'Hours'} fieldDefaultValue={'00'} on:inputChange={handleInputChange} />
   <Input fieldLabel={'minutes'} fieldName={'Minutes'} fieldDefaultValue={'00'} on:inputChange={handleInputChange} />
 </div>
-
 <Button
-  buttonDisabled={Object.values(calculationInput).some(value => !value)}
+  buttonDisabled={Object.values(calculationInput).some(value => value === '' || value === null || value === undefined)}
   buttonText={'Calculate'}
   buttonHoverColor="red"
   on:click={() => calculateTime(calculationInput)}

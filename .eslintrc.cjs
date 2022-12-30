@@ -71,6 +71,7 @@ module.exports = {
     '*.d.ts',
     '*.config.js',
     '*.config.ts',
-    'test/**/*.js'
+    'test/**/*.js',
+    '*.html'
   ],
 }

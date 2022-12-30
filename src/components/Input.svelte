@@ -8,15 +8,15 @@
 	export let fieldLabelPosition = 'top';
 
 	// Variables
-  const dispatch = createEventDispatcher();
+  const dispatch = createEventDispatcher<{inputChange: { value: string, fieldLabel: string }}>();
 	let fieldValue: string = fieldDefaultValue;
 
   // Methods
   const onValueChange = (value: string) => dispatch('inputChange', {value, fieldLabel});
   const onFieldFocus = () => {
     fieldValue = '';
-    dispatch('inputChange', {fieldValue, fieldLabel})
-  }
+    dispatch('inputChange', {value: fieldValue, fieldLabel})
+  };
 </script>
 
 <div class="input input--{fieldLabelPosition}">

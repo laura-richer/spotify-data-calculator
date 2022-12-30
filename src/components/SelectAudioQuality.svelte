@@ -4,7 +4,7 @@
 
   interface AudioQualityObject {
     name: string;
-    value : number,
+    value: number;
   }
 
   // Props
@@ -21,8 +21,8 @@
   let currentAudioQuality: number;
 
   // Methods
-  const handleSelectAudioQuality = (selectedAudioQuality: number) => {
-    currentAudioQuality = selectedAudioQuality;
+  const handleSelectAudioQuality = (selectedAudioQuality: AudioQualityObject) => {
+    currentAudioQuality = selectedAudioQuality.value;
     dispatch('selectAudioQuality', currentAudioQuality);
   };
 
@@ -42,7 +42,7 @@
   <div class="select-audio-quality__options">
     {#each audioQualities as audioQuality }
       <Button
-        on:click={() => handleSelectAudioQuality(audioQuality.value)}
+        on:click={() => handleSelectAudioQuality(audioQuality)}
         active={currentAudioQuality === audioQuality.value}
         buttonHoverColor="blue"
         buttonType="compact"

@@ -11,11 +11,11 @@
 
   // Variables
   const dispatch = createEventDispatcher();
-  let result: number;
+  let result: string;
   let resultTitle: string;
 
 
-  const handleShowResult = (event: CustomEvent<object>) => {
+  const handleShowResult = (event: CustomEvent<{value: string, title: string}>) => {
     const { value, title } = event.detail;
 
     result = value;
@@ -23,7 +23,7 @@
   };
 
   const handleReset = () => {
-    result = 0;
+    result = '0';
     dispatch('reset', true);
   };
 

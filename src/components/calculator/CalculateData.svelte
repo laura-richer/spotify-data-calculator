@@ -9,15 +9,15 @@
 	export let audioQuality: number;
 
 	// Variables
-  const dispatch = createEventDispatcher();
+  const dispatch = createEventDispatcher<{hasResult: { value: string, title: string }}>();
   const resultTitle = 'Heres how much data you need';
-	let calculationInput: number;
+	let calculationInput: string;
   let result: string;
 
 	// Methods
-  const handleInputChange = (event: CustomEvent<object>) => calculationInput = event.detail.value;
+  const handleInputChange = (event: CustomEvent<{value: string, fieldLabel: string}>) => calculationInput = event.detail.value;
 
-	const calculateData = (input: number) => {
+	const calculateData = (input: string) => {
     console.log(input);
     console.log(audioQuality);
 

@@ -1,6 +1,6 @@
 <script lang="ts">
   import { createEventDispatcher } from 'svelte';
-  import Button from './Button.svelte';
+  import Button from '$lib/atoms/Button.svelte';
 
   interface AudioQualityObject {
     name: string;
@@ -12,15 +12,17 @@
 
   // Variables
   const dispatch = createEventDispatcher();
-  const audioQualities:AudioQualityObject[] = [
+  let audioQualities = [
     { name: 'Low', value: 24 },
     { name: 'Medium', value: 96 },
     { name: 'High', value: 160 },
     { name: 'Very high', value: 320 },
   ];
+
   let currentAudioQuality: number;
 
   // Methods
+  // TODO is there a different way to define AudioQualityObject
   const handleSelectAudioQuality = (selectedAudioQuality: AudioQualityObject) => {
     currentAudioQuality = selectedAudioQuality.value;
     dispatch('selectAudioQuality', currentAudioQuality);

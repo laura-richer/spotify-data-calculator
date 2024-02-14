@@ -1,13 +1,13 @@
 <script lang="ts">
   import { createEventDispatcher } from 'svelte';
-  import Button from './Button.svelte';
+  import Button from '$lib/atoms/Button.svelte';
 
   // Props
   export let resetSelectedCalculator: string;
 
   // Variables
   const dispatch = createEventDispatcher();
-  const calculatorTypes: Array<string> = ['Time', 'Data'];
+  const calculatorTypes = ['Time', 'Data'];
 
   let selectedCalculatorComponentName: string;
   let selectedCalculatorType: string;

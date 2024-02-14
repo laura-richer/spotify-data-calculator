@@ -1,9 +1,9 @@
-<script type="ts">
+<script lang="ts">
   import { createEventDispatcher } from 'svelte';
 
-  import CalculateData from './CalculateData.svelte';
-  import CalculateTime from './CalculateTime.svelte';
-  import CalculatorResult from './CalculatorResult.svelte';
+  import CalculateData from '$lib/components/calculator/CalculateData.svelte';
+  import CalculateTime from '$lib/components/calculator/CalculateTime.svelte';
+  import CalculatorResult from '$lib/components/calculator/CalculatorResult.svelte';
 
   // Props
   export let audioQuality: number;
@@ -58,14 +58,13 @@
     &-element {
       margin-bottom: $spacer * 1.5;
 
-      /* stylelint-disable-next-line selector-pseudo-class-no-unknown */
-      &:global {
-        & > * {
-          &:not(:last-child) {
-            margin-bottom: $spacer * 1.5;
-          }
-        }
-      }
+      // &:global {
+      //   & > * {
+      //     &:not(:last-child) {
+      //       margin-bottom: $spacer * 1.5;
+      //     }
+      //   }
+      // }
     }
 
     &--disabled {

@@ -1,7 +1,7 @@
 <script lang="ts">
   import { createEventDispatcher } from 'svelte';
-  import CalculatorTitle from './CalculatorTitle.svelte';
-  import Button from '../Button.svelte';
+  import CalculatorTitle from '$lib/components/calculator/CalculatorTitle.svelte';
+  import Button from '$lib/atoms/Button.svelte';
 
   // props
   export let result: string | number;

@@ -62,7 +62,6 @@
     }
   }
 
-  // TODO refactor to use css variables like blueprint
   &-hover--green {
     &:hover,
     &#{$btn}--active {

@@ -17,7 +17,7 @@
 
   const handleShowResult = (event: CustomEvent<{value: string, title: string}>) => {
     const { value, title } = event.detail;
-
+    console.log(title);
     result = value;
     resultTitle = title;
   };
@@ -52,19 +52,15 @@
   .calculator {
     display: flex;
     flex-direction: column;
+    gap: $spacer * 3;
     padding: $spacer * 1.5;
     background-color: var(--color-grey);
 
     &-element {
-      margin-bottom: $spacer * 1.5;
-
-      // &:global {
-      //   & > * {
-      //     &:not(:last-child) {
-      //       margin-bottom: $spacer * 1.5;
-      //     }
-      //   }
-      // }
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: $spacer;
     }
 
     &--disabled {

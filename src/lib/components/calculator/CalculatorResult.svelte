@@ -18,3 +18,12 @@
   buttonHoverColor="red"
   on:click={() => dispatch('reset', true)}
 />
+
+<style lang="scss">
+.result {
+  &__value {
+    margin-bottom: 0;
+  }
+}
+</style>
+

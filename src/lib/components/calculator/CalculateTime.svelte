@@ -16,7 +16,7 @@
 	export let audioQuality: number;
 
 	// Variables
-  const resultTitle = 'Heres how long you can listen for';
+  const resultTitle = 'Heres how much data you need';
 	const calculationInput: CalculationInputObject = {
     days: '00',
     hours: '00',

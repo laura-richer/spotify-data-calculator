@@ -12,7 +12,7 @@ export let audioQuality: number;
 
 // Variables
 const dispatch = createEventDispatcher<{hasResult: { value: string, title: string }}>();
-const resultTitle = 'Heres how much data you need';
+const resultTitle = 'You can listen for...';
 let calculationInput: string;
 
 interface Duration {

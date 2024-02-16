@@ -1,63 +1,80 @@
 <script lang="ts">
-import { createEventDispatcher } from 'svelte';
-
 import CalculatorTitle from '$lib/components/calculator/CalculatorTitle.svelte';
 import Button from '$lib/atoms/Button.svelte';
 import Input from '$lib/atoms/Input.svelte';
 
-// import ConvertGbToB from '$lib/utils/convert-gb-to-b';
+import { setResult, setResultTitle, store } from '$lib/store';
 
-// Props
-export let audioQuality: number;
+interface CalculationInputObject {
+  [key: string]: string;
+  days: string;
+  hours: string;
+}
 
 // Variables
-const dispatch = createEventDispatcher<{hasResult: { value: string, title: string }}>();
-const resultTitle = 'You can listen for...';
-let calculationInput: string;
+const calculationInput: CalculationInputObject = {
+  days: '00',
+  hours: '00',
+};
+let selectedAudioQuality: number;
 
-interface Duration {
-    days: number;
-    hours: number;
-}
+// Store
+store.subscribe((value) => {
+  selectedAudioQuality = value.audioQuality;
+});
 
 // Methods
-const handleInputChange = (event: CustomEvent<{value: string, fieldLabel: string}>) => calculationInput = event.detail.value;
-
-const pluralize = (value: number, unit: string): string => value === 1 ? unit : unit + "s";
-
-const formatDuration = (duration: Duration): string => {
-    const { days, hours } = duration;
-    const daysText = days > 0 ? `${days} ${pluralize(days, 'day')} and ` : '';
-    const hoursText = `${hours} ${pluralize(hours, 'hour')}`;
-    return daysText + hoursText;
+const handleInputChange = (event: CustomEvent<{value: string, fieldLabel: string}>):void => {
+  const { value, fieldLabel } = event.detail;
+  calculationInput[fieldLabel] = value;
 }
 
-const calculateData = (input: string) => {
-  // Convert data from gigabytes to bits
-  const dataBits = Number(input) * 1024 * 1024 * 1024 * 8;
+const convertToHours = (days: number, hours: number):number => days * 24 + hours;
 
-  // Calculate duration in seconds
-  const durationSeconds = dataBits / (audioQuality * 1000);
+const calculateTime = (input: CalculationInputObject):number => {
+  const {days, hours} = input;
 
-  // Convert duration from seconds to days and hours
-  const durationDays = Math.floor(durationSeconds / (3600 * 24));
-  const durationHours = Math.floor((durationSeconds % (3600 * 24)) / 3600);
+  const durationHours = convertToHours(Number(days), Number(hours));
 
-  // Format the text to output from the calculator
-  const durationText = formatDuration({ days: durationDays, hours: durationHours });
+  // Convert hours to seconds
+  const durationSeconds = durationHours * 3600;
 
+  // Convert bitrate to bits per second
+  const bitrateBps = selectedAudioQuality * 1000;
 
-  dispatch('hasResult', {value: durationText, title: resultTitle});
-};
+  // Calculate data usage in megabytes
+  const dataUsageMB = (durationSeconds * bitrateBps) / (8 * 1024 * 1024);
+
+  // Convert data usage to gigabytes and round down to the nearest whole number
+  const dataUsageGB = Math.ceil(dataUsageMB / 1024);
+
+  return dataUsageGB;
+}
+
+const handleCalculation = (input: CalculationInputObject):void => {
+  const resultValue = calculateTime(input);
+
+  setResult(`${resultValue} GB`);
+  setResultTitle('Heres how much data you need:');
+}
 </script>
 
-<CalculatorTitle title="How much data you have left? I will tell you how long you can listen for." />
+<CalculatorTitle title="How much time you would like to listen for? I will tell you how much mobile data you need." />
 
-<Input fieldLabel={'gb'} fieldName={'GB'} fieldLabelPosition={'right'} on:inputChange={handleInputChange} />
-
+<div class="calculate-data">
+  <Input fieldLabel={'days'} fieldName={'Days'} fieldDefaultValue={'00'} on:inputChange={handleInputChange} />
+  <Input fieldLabel={'hours'} fieldName={'Hours'} fieldDefaultValue={'00'} on:inputChange={handleInputChange} />
+</div>
 <Button
-  buttonDisabled={!calculationInput}
+  buttonDisabled={Object.values(calculationInput).some(value => value === '' || value === null || value === undefined)}
   buttonText={'Calculate'}
   buttonHoverColor="red"
-  on:click={() => calculateData(calculationInput)}
+  on:click={() => handleCalculation(calculationInput)}
 />
+
+<style lang="scss">
+  .calculate-data {
+    display: flex;
+    justify-content: center;
+  }
+</style>

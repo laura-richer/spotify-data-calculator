@@ -1,38 +1,35 @@
 <script lang="ts">
-  import { createEventDispatcher } from 'svelte';
-  import Button from '$lib/atoms/Button.svelte';
+import Button from '$lib/atoms/Button.svelte';
 
-  interface AudioQualityObject {
-    name: string;
-    value: number;
-  }
+import { resetResult, setAudioQuality, store } from '$lib/store';
 
-  // Props
-  export let resetSelectedAudioQuality: number;
+interface AudioQualityObject {
+  name: string;
+  value: number;
+}
 
-  // Variables
-  const dispatch = createEventDispatcher();
-  let audioQualities = [
-    { name: 'Low', value: 24 },
-    { name: 'Medium', value: 96 },
-    { name: 'High', value: 160 },
-    { name: 'Very high', value: 320 },
-  ];
+// Variables
+let audioQualities = [
+  { name: 'Low', value: 24 },
+  { name: 'Medium', value: 96 },
+  { name: 'High', value: 160 },
+  { name: 'Very high', value: 320 },
+];
 
-  let currentAudioQuality: number;
+let selectedAudioQuality: number;
 
-  // Methods
-  // TODO is there a different way to define AudioQualityObject
-  const handleSelectAudioQuality = (selectedAudioQuality: AudioQualityObject) => {
-    currentAudioQuality = selectedAudioQuality.value;
-    dispatch('selectAudioQuality', currentAudioQuality);
-  };
+// Store
+store.subscribe((value) => {
+  selectedAudioQuality = value.audioQuality;
+});
 
-  $: {
-    if (resetSelectedAudioQuality === 0) {
-      currentAudioQuality = 0;
-    }
-  }
+// Methods
+const handleSelectAudioQuality = (quality: AudioQualityObject):void => {
+  if (quality.value === selectedAudioQuality) return;
+
+  resetResult();
+  setAudioQuality(quality.value);
+};
 </script>
 
 <div class="select-audio-quality">
@@ -45,7 +42,7 @@
     {#each audioQualities as audioQuality }
       <Button
         on:click={() => handleSelectAudioQuality(audioQuality)}
-        active={currentAudioQuality === audioQuality.value}
+        active={selectedAudioQuality === audioQuality.value}
         buttonHoverColor="blue"
         buttonType="compact"
         buttonText={audioQuality.name}/>

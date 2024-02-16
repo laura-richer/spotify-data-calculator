@@ -4,34 +4,29 @@ import Header from '$lib/components/Header.svelte';
 import SelectCalculatorType from '$lib/components/SelectCalculatorType.svelte';
 import SelectAudioQuality from '$lib/components/SelectAudioQuality.svelte';
 
+import { store } from '$lib/store';
 import '$lib/scss/global.scss';
 
-let audioQuality: number;
-let selectedCalculator: string;
+let selectedCalculatorType: string;
 
-const handleSelectAudioQuality = (event: CustomEvent<number>) => audioQuality = event.detail;
-const handleSelectCalculatorType = (event: CustomEvent<string>) => selectedCalculator = event.detail;
-const handleReset = () => {
-  audioQuality = 0;
-  selectedCalculator = '';
-}
+store.subscribe((value) => {
+  selectedCalculatorType = value.calculatorType;
+});
 </script>
 
 <div class="main">
 	<div class="main__wrapper">
 		<Header />
-
 		<div class="main__container">
 			<div class="main__block">
-        <SelectCalculatorType on:selectCalculator={handleSelectCalculatorType} resetSelectedCalculator={selectedCalculator} />
+				<SelectAudioQuality />
 			</div>
 
-			<div class="main__block">
-				<SelectAudioQuality on:selectAudioQuality={handleSelectAudioQuality} resetSelectedAudioQuality={audioQuality} />
+      <div class="main__block">
+        <SelectCalculatorType />
 			</div>
-
-      {#if selectedCalculator}
-        <Calculator audioQuality={audioQuality} calculatorType={selectedCalculator} on:reset={handleReset} />
+      {#if selectedCalculatorType}
+        <Calculator />
 			{/if}
 		</div>
 	</div>

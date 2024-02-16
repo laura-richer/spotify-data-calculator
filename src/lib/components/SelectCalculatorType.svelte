@@ -1,40 +1,34 @@
 <script lang="ts">
-  import { createEventDispatcher } from 'svelte';
-  import Button from '$lib/atoms/Button.svelte';
+import Button from '$lib/atoms/Button.svelte';
 
-  // Props
-  export let resetSelectedCalculator: string;
+import { resetResult, setCalculatorType, store } from '$lib/store';
 
-  // Variables
-  const dispatch = createEventDispatcher();
-  const calculatorTypes = ['Time', 'Data'];
+// Variables
+const calculatorTypes = ['Time', 'Data'];
 
-  let selectedCalculatorComponentName: string;
-  let selectedCalculatorType: string;
+let selectedCalculatorType: string;
 
+// Store
+store.subscribe((value) => {
+  selectedCalculatorType = value.calculatorType;
+});
 
-  // Methods
-  const handleSelectCalculatorType = (calculatorType: string) => {
-    selectedCalculatorComponentName = `Calculate${calculatorType}`;
-    selectedCalculatorType = calculatorType;
+// Methods
+const handleSelectCalculatorType = (type: string):void => {
+  if (type === selectedCalculatorType) return;
 
-    dispatch('selectCalculator', selectedCalculatorComponentName);
-  };
-
-  $: {
-    if (!resetSelectedCalculator) {
-      selectedCalculatorType = '';
-    }
-  }
+  resetResult();
+  setCalculatorType(type);
+};
 </script>
 
 <div class="select-calculator-type">
-  {#each calculatorTypes as calculatorType}
+  {#each calculatorTypes as type}
     <Button
-      on:click={() => handleSelectCalculatorType(calculatorType)}
+      on:click={() => handleSelectCalculatorType(type)}
       buttonHoverColor="green"
-      buttonText={`Calculate ${calculatorType}`}
-      active={calculatorType === selectedCalculatorType}
+      buttonText={`Calculate ${type}`}
+      active={type === selectedCalculatorType}
     />
   {/each}
 </div>

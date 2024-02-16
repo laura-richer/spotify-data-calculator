@@ -1,47 +1,34 @@
 <script lang="ts">
-  import { createEventDispatcher } from 'svelte';
-
-  import CalculateData from '$lib/components/calculator/CalculateData.svelte';
-  import CalculateTime from '$lib/components/calculator/CalculateTime.svelte';
-  import CalculatorResult from '$lib/components/calculator/CalculatorResult.svelte';
-
-  // Props
-  export let audioQuality: number;
-  export let calculatorType: string;
-
-  // Variables
-  const dispatch = createEventDispatcher();
-  let result: string;
-  let resultTitle: string;
+import CalculateData from '$lib/components/calculator/CalculateData.svelte';
+import CalculateTime from '$lib/components/calculator/CalculateTime.svelte';
+import CalculatorResult from '$lib/components/calculator/CalculatorResult.svelte';
 
 
-  const handleShowResult = (event: CustomEvent<{value: string, title: string}>) => {
-    const { value, title } = event.detail;
-    console.log(title);
-    result = value;
-    resultTitle = title;
-  };
+import { store } from '$lib/store';
 
-  const handleReset = () => {
-    result = '0';
-    dispatch('reset', true);
-  };
+// Variables
+let selectedCalculatorType: string;
+let selectedAudioQuality: number;
+let currentResult: string;
 
-  // TODO set result to 0 on any interaction with the page apart from the form input
+// Store
+store.subscribe((value) => {
+  selectedCalculatorType = value.calculatorType;
+  selectedAudioQuality = value.audioQuality;
+  currentResult = value.result;
+});
 </script>
 
-<div class="calculator" class:calculator--disabled={!audioQuality}>
+<div class="calculator" class:calculator--disabled={!selectedAudioQuality}>
   <div class="calculator-element">
     <svelte:component
-      this={calculatorType === 'CalculateTime' ? CalculateTime : CalculateData}
-      audioQuality={audioQuality}
-      on:hasResult={handleShowResult}
+      this={selectedCalculatorType === 'Time' ? CalculateTime : CalculateData}
     />
   </div>
 
-  {#if result}
+  {#if currentResult}
     <div class="calculator-element">
-      <CalculatorResult title={resultTitle} result={result} on:reset={handleReset} />
+      <CalculatorResult />
     </div>
   {/if}
 </div>

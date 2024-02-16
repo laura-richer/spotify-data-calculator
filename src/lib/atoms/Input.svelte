@@ -9,11 +9,11 @@
 
 	// Variables
   const dispatch = createEventDispatcher<{inputChange: { value: string, fieldLabel: string }}>();
-	let fieldValue: string = fieldDefaultValue;
+	let fieldValue = fieldDefaultValue;
 
   // Methods
-  const onValueChange = (value: string) => dispatch('inputChange', {value, fieldLabel});
-  const onFieldFocus = () => {
+  const onValueChange = (value: string):boolean => dispatch('inputChange', {value, fieldLabel});
+  const onFieldFocus = ():void => {
     fieldValue = '';
     dispatch('inputChange', {value: fieldValue, fieldLabel})
   };

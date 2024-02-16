@@ -1,73 +1,65 @@
 <script lang="ts">
-  import { createEventDispatcher } from 'svelte';
+import CalculatorTitle from '$lib/components/calculator/CalculatorTitle.svelte';
+import Button from '$lib/atoms/Button.svelte';
+import Input from '$lib/atoms/Input.svelte';
 
-  import CalculatorTitle from '$lib/components/calculator/CalculatorTitle.svelte';
-	import Button from '$lib/atoms/Button.svelte';
-	import Input from '$lib/atoms/Input.svelte';
+import { store, setResult, setResultTitle } from '$lib/store';
 
-  interface CalculationInputObject {
-    [key: string]: string;
-    days: string;
-    hours: string;
-  }
+interface Duration {
+  days: number;
+  hours: number;
+}
 
-	// Props
-  const dispatch = createEventDispatcher<{hasResult: { value: string, title: string }}>();
-	export let audioQuality: number;
+// Variables
+let selectedAudioQuality: number;
+let calculationInput: string;
 
-	// Variables
-  const resultTitle = 'Heres how much data you need';
-	const calculationInput: CalculationInputObject = {
-    days: '00',
-    hours: '00',
-  };
+// Store
+store.subscribe((value) => {
+  selectedAudioQuality = value.audioQuality;
+});
 
-	// Methods
-  const handleInputChange = (event: CustomEvent<{value: string, fieldLabel: string}>) => {
-    const { value, fieldLabel } = event.detail;
-    calculationInput[fieldLabel] = value;
-  }
+// Methods
+const handleInputChange = (event: CustomEvent<{value: string, fieldLabel: string}>) => calculationInput = event.detail.value;
 
-  const convertToHours = (days: number, hours: number): number => days * 24 + hours;
+const pluralize = (value: number, unit: string):string => value === 1 ? unit : unit + "s";
 
+const formatDuration = (duration: Duration):string => {
+  const { days, hours } = duration;
+  const daysText = days > 0 ? `${days} ${pluralize(days, 'day')} and ` : '';
+  const hoursText = `${hours} ${pluralize(hours, 'hour')}`;
+  return daysText + hoursText;
+}
 
-	const calculateTime = (input: CalculationInputObject) => {
-    const {days, hours} = input;
+const calculateData = (input: string):string => {
+  // Convert data from gigabytes to bits
+  const dataBits = Number(input) * 1024 * 1024 * 1024 * 8;
 
-    const durationHours = convertToHours(Number(days), Number(hours));
+  // Calculate duration in seconds
+  const durationSeconds = dataBits / (selectedAudioQuality * 1000);
 
-    // Convert hours to seconds
-    const durationSeconds = durationHours * 3600;
+  // Convert duration from seconds to days and hours
+  const durationDays = Math.floor(durationSeconds / (3600 * 24));
+  const durationHours = Math.floor((durationSeconds % (3600 * 24)) / 3600);
 
-    // Convert bitrate to bits per second
-    const bitrateBps = audioQuality * 1000;
+  // Format the text to output from the calculator
+  const durationText = formatDuration({ days: durationDays, hours: durationHours });
 
-    // Calculate data usage in megabytes
-    const dataUsageMB = (durationSeconds * bitrateBps) / (8 * 1024 * 1024);
+  return durationText;
+};
 
-   // Convert data usage to gigabytes and round down to the nearest whole number
-   const dataUsageGB = Math.ceil(dataUsageMB / 1024);
-
-    dispatch('hasResult', {value: dataUsageGB.toString(), title: resultTitle});
-  }
+const handleCalculation = (input: string):void => {
+  const resultValue = calculateData(input);
+  setResult(resultValue);
+  setResultTitle('You can listen for...');
+};
 </script>
 
-<CalculatorTitle title="How much time you would like to listen for? I will tell you how much mobile data you need." />
-
-<div class="calculate-time">
-  <Input fieldLabel={'days'} fieldName={'Days'} fieldDefaultValue={'00'} on:inputChange={handleInputChange} />
-  <Input fieldLabel={'hours'} fieldName={'Hours'} fieldDefaultValue={'00'} on:inputChange={handleInputChange} />
-</div>
+<CalculatorTitle title="How much data you have left? I will tell you how long you can listen for." />
+<Input fieldLabel={'gb'} fieldName={'GB'} fieldLabelPosition={'right'} on:inputChange={handleInputChange} />
 <Button
-  buttonDisabled={Object.values(calculationInput).some(value => value === '' || value === null || value === undefined)}
+  buttonDisabled={!calculationInput}
   buttonText={'Calculate'}
   buttonHoverColor="red"
-  on:click={() => calculateTime(calculationInput)}
+  on:click={() => handleCalculation(calculationInput)}
 />
-
-<style lang="scss">
-  .calculate-time {
-    display: flex;
-    justify-content: center;
-  }
-</style>

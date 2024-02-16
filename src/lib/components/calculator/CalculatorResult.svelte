@@ -1,22 +1,26 @@
 <script lang="ts">
-  import { createEventDispatcher } from 'svelte';
-  import CalculatorTitle from '$lib/components/calculator/CalculatorTitle.svelte';
-  import Button from '$lib/atoms/Button.svelte';
+import Button from '$lib/atoms/Button.svelte';
+import CalculatorTitle from '$lib/components/calculator/CalculatorTitle.svelte';
 
-  // props
-  export let result: string | number;
-  export let title: string;
+import { store, resetCalculator } from '$lib/store';
 
-  // Variables
-  const dispatch = createEventDispatcher();
+// Variables
+let currentResult: string;
+let currentResultTitle: string;
+
+// Store
+store.subscribe((value) => {
+  currentResult = value.result;
+  currentResultTitle = value.resultTitle;
+});
 </script>
 
-<CalculatorTitle title={title} />
-<p class="result__value">{result}</p>
+<CalculatorTitle title={currentResultTitle} />
+<p class="result__value">{currentResult}</p>
 <Button
   buttonText={'Restart'}
   buttonHoverColor="red"
-  on:click={() => dispatch('reset', true)}
+  on:click={() => resetCalculator()}
 />
 
 <style lang="scss">

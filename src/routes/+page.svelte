@@ -57,7 +57,6 @@ store.subscribe((value) => {
       padding: $spacer * 2;
       border-width: math.div($spacer, 2);
       background: url(../lib/assets/images/sweeper-grid.png) top left;
-      text-align: center;
     }
 
     &__block {

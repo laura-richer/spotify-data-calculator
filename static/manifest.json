@@ -1,0 +1,21 @@
+{
+  "name": "Spotify Data Calculator",
+  "short_name": "SDC",
+  "start_url": "/",
+  "display": "minimal-ui",
+  "icons": [
+    {
+      "src": "pwa-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "pwa-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "scope": "/",
+  "theme_color": "#000000",
+  "background_color": "#c0c0c0"
+}

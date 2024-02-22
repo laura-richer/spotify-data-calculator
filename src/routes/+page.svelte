@@ -47,7 +47,7 @@ store.subscribe((value) => {
       max-width: 90%;
       flex-direction: column;
       justify-content: center;
-      margin: 0 auto;
+      margin: calc($spacer * 2) auto;
     }
 
     &__container {

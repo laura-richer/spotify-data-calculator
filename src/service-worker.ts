@@ -66,6 +66,5 @@ self.addEventListener('fetch', (event) => {
     return new Response('Not found', { status: 404 });
   }
 
-  // respond();
   event.respondWith(respond());
 });

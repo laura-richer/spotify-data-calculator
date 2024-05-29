@@ -1,4 +1,5 @@
 <script lang="ts">
+import { audioQualities } from '$lib/constants/audio-qualities.js';
 import Button from '$lib/atoms/Button.svelte';
 
 import { resetResult, setAudioQuality, store } from '$lib/store';
@@ -7,14 +8,6 @@ interface AudioQualityObject {
   name: string;
   value: number;
 }
-
-// Variables
-let audioQualities = [
-  { name: 'Low', value: 24 },
-  { name: 'Medium', value: 96 },
-  { name: 'High', value: 160 },
-  { name: 'Very high', value: 320 },
-];
 
 let selectedAudioQuality: number;
 
@@ -42,10 +35,11 @@ const handleSelectAudioQuality = (quality: AudioQualityObject):void => {
     {#each audioQualities as audioQuality }
       <Button
         on:click={() => handleSelectAudioQuality(audioQuality)}
-        active={selectedAudioQuality === audioQuality.value}
+        buttonSelected={selectedAudioQuality === audioQuality.value}
         buttonHoverColor="blue"
         buttonType="compact"
-        buttonText={audioQuality.name}/>
+        buttonText={audioQuality.name}
+      />
     {/each}
   </div>
 </div>

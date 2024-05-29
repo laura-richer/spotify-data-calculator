@@ -29,9 +29,9 @@ const handleInputChange = (event: CustomEvent<{value: string, fieldLabel: string
   calculationInput[fieldLabel] = value;
 }
 
-const convertToHours = (days: number, hours: number):number => days * 24 + hours;
+export const convertToHours = (days: number, hours: number):number => days * 24 + hours;
 
-const calculateTime = (input: CalculationInputObject):number => {
+export const calculateTime = (input: CalculationInputObject):number => {
   const {days, hours} = input;
 
   const durationHours = convertToHours(Number(days), Number(hours));
@@ -47,6 +47,7 @@ const calculateTime = (input: CalculationInputObject):number => {
 
   // Convert data usage to gigabytes and round down to the nearest whole number
   const dataUsageGB = Math.ceil(dataUsageMB / 1024);
+  console.log(dataUsageGB);
 
   return dataUsageGB;
 }
@@ -67,7 +68,7 @@ const handleCalculation = (input: CalculationInputObject):void => {
 </div>
 <Button
   buttonDisabled={Object.values(calculationInput).some(value => value === '' || value === null || value === undefined)}
-  buttonText={'Calculate'}
+  buttonText='Calculate'
   buttonHoverColor="red"
   on:click={() => handleCalculation(calculationInput)}
 />

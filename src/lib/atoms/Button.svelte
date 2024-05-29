@@ -1,5 +1,5 @@
 <script lang="ts">
-	export let active = false;
+	export let buttonSelected = false;
   export let buttonDisabled = false;
 	export let buttonText = 'Add button text';
 	export let buttonType = 'primary';
@@ -9,7 +9,7 @@
 <button
   on:click
   class="btn btn--{buttonType} btn-hover--{buttonHoverColor}"
-  class:btn--active={active}
+  class:btn--active={buttonSelected}
   class:btn--disabled={buttonDisabled}
 >
   {buttonText}

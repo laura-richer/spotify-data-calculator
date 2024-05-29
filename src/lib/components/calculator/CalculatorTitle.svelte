@@ -1,5 +1,5 @@
 <script lang="ts">
-  export let title: string;
+  export let title = 'Add calculator title';
 </script>
 
 <span class="calculator-title">{title}</span>

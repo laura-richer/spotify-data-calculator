@@ -22,16 +22,17 @@ store.subscribe((value) => {
 // Methods
 const handleInputChange = (event: CustomEvent<{value: string, fieldLabel: string}>) => calculationInput = event.detail.value;
 
-const pluralize = (value: number, unit: string):string => value === 1 ? unit : unit + "s";
+export const pluralize = (value: number, unit: string):string => value === 1 ? unit : unit + "s";
 
-const formatDuration = (duration: Duration):string => {
+export const formatDuration = (duration: Duration):string => {
   const { days, hours } = duration;
   const daysText = days > 0 ? `${days} ${pluralize(days, 'day')} and ` : '';
   const hoursText = `${hours} ${pluralize(hours, 'hour')}`;
+  console.log(daysText + hoursText);
   return daysText + hoursText;
 }
 
-const calculateData = (input: string):string => {
+export const calculateData = (input: string):string => {
   // Convert data from gigabytes to bits
   const dataBits = Number(input) * 1024 * 1024 * 1024 * 8;
 
@@ -59,7 +60,7 @@ const handleCalculation = (input: string):void => {
 <Input fieldLabel={'gb'} fieldName={'GB'} fieldLabelPosition={'right'} on:inputChange={handleInputChange} />
 <Button
   buttonDisabled={!calculationInput}
-  buttonText={'Calculate'}
+  buttonText='Calculate'
   buttonHoverColor="red"
   on:click={() => handleCalculation(calculationInput)}
 />

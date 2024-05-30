@@ -1,13 +1,12 @@
-import { render } from '@testing-library/svelte';
-import { test, describe} from 'vitest';
+import { render, screen } from '@testing-library/svelte';
+import { test, describe, expect } from 'vitest';
 import CalculatorResult from '$lib/components/calculator/CalculatorResult.svelte';
 
 describe('Calculator result', () => {
-  test('should show result', () => {
+  test('should show restart button', () => {
+    render(CalculatorResult);
 
-  });
-
-  test('should show reset button', () => {
-
+    const resetButton = screen.getByText('Restart');
+    expect(resetButton).toBeInTheDocument();
   });
 });

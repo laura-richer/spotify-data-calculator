@@ -37,7 +37,6 @@ export const formatDuration = (duration: Duration):string => {
   const { days, hours } = duration;
   const daysText = days > 0 ? `${days} ${pluralize(days, 'day')} and ` : '';
   const hoursText = `${hours} ${pluralize(hours, 'hour')}`;
-  console.log(daysText + hoursText);
   return daysText + hoursText;
 }
 

@@ -11,6 +11,7 @@
   class="btn btn--{buttonType} btn-hover--{buttonHoverColor}"
   class:btn--active={buttonSelected}
   class:btn--disabled={buttonDisabled}
+  disabled={buttonDisabled}
 >
   {buttonText}
 </button>

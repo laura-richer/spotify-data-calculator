@@ -1,12 +1,11 @@
 import { render, fireEvent, screen } from '@testing-library/svelte';
 import { expect, test, describe } from 'vitest';
-import { tick } from 'svelte';
 
 import { calculatorTypes } from '$lib/constants/calculator-types.js';
 import SelectedCalculatorType from '$lib/components/SelectCalculatorType.svelte';
 
 describe('Select calculator type', () => {
-  test('renders a button for each calculator type', async () => {
+  test('renders a button for each calculator type', () => {
     const { container } = render(SelectedCalculatorType);
 
     const calculatorTypeButtons = container.querySelectorAll('button');
@@ -31,8 +30,7 @@ describe('Select calculator type', () => {
 
     const firstButton = screen.getByText('Calculate Time');
 
-    fireEvent.click(firstButton);
-    await tick();
+    await fireEvent.click(firstButton);
 
     calculatorTypeButtons.forEach(button => {
       if (button !== firstButton) expect(button.classList).not.toContain('btn--active');

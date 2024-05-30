@@ -3,14 +3,14 @@ import { expect, describe, test } from 'vitest'
 
 import CalculateData from '$lib/components/calculator/CalculateData.svelte';
 
-describe('CalculateData', () => {
+describe('Calculate data functions', () => {
   test('should convert days and hours to total hours correctly', () => {
-  const { component } = render(CalculateData);
+    const { component } = render(CalculateData);
 
-   const result = component.convertInputToHours(1, 12);
-   const expected = 36;
+    const result = component.convertInputToHours(1, 12);
+    const expected = 36;
 
-   expect(result).toEqual(expected);
+    expect(result).toEqual(expected);
   });
 
   test('should convert total hours to seconds correctly', () => {
@@ -48,13 +48,4 @@ describe('CalculateData', () => {
 
     expect(result).toEqual(expected);
    });
-
-  //  test('should calculate data needed correctly', () => {
-  //   const { component } = render(CalculateData);
-
-  //   const expectedDataUsageGB = 1;
-  //   const actualDataUsageGB = component.calculateDataNeeded({ days: '1', hours:'12' });
-
-  //   expect(actualDataUsageGB).toBe(expectedDataUsageGB);
-  // });
 });

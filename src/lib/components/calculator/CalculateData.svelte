@@ -13,8 +13,8 @@
 
   // Variables
   const calculationInput: CalculationInputObject = {
-    days: '00',
-    hours: '00',
+    days: '',
+    hours: '',
   };
   let selectedAudioQuality: number;
 

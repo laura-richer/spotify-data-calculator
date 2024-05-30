@@ -1,28 +1,37 @@
 import { render } from '@testing-library/svelte';
-import { expect, test, describe, vi } from 'vitest';
+import { expect, test, describe } from 'vitest';
 import CalculateTime from '$lib/components/calculator/CalculateTime.svelte';
 
-describe('Calculate time', () => {
-  // test('should calculate the correct time needed', () => {
-  //   const { component } = render(CalculateTime, { store: mockStore });
+describe('Calculate time functions', () => {
+  test('should correctly convert data from GB to Bits', () => {
+    const { component } = render(CalculateTime);
 
-  //   const input = {
-  //     days: '2',
-  //     hours: '3',
-  //   };
+    const bits = component.convertDataGbToBits(1, 'GB');
+    const expectedBits = 8589934592;
 
-  //   const result = component.calculateTime(input);
-  //   const expected = 3;
-  //   expect(result).toEqual(expected);
-  // });
+    expect(bits).toEqual(expectedBits);
+  });
 
-  // test('should format duration correctly', () => {
-  //   const { component } = render(CalculateTime);
+  test('should correctly convert bits to seconds', () => {
+    const { component } = render(CalculateTime);
 
-  //   const result = component.formatDuration({days: '1', hours: '5'});
-  //   const expected = '1 day and 5 hours';
-  //   expect(result).toEqual(expected);
-  // }),
+    const seconds = component.calculateSecondsFromBits(8589934592, 24);
+    const expectedSeconds = 357913.9413333333;
+
+    expect(seconds).toEqual(expectedSeconds);
+  });
+
+  test('should correctly seconds to days and hours', () => {
+    const { component } = render(CalculateTime);
+
+    const daysAndHours = component.convertSecondsToDaysAndHours(357913.9413333333);
+    const expectedDaysAndHours = {
+      days: 4,
+      hours: 3
+    }
+
+    expect(daysAndHours).toEqual(expectedDaysAndHours);
+  });
 
   test('should pluralise values if required', () => {
     const { component } = render(CalculateTime);

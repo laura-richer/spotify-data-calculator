@@ -1,35 +1,63 @@
-import { render, screen, userEvent } from '@testing-library/svelte';
-import { test, describe, expect, vi } from 'vitest';
+import { render, screen, fireEvent } from '@testing-library/svelte';
+import { test, describe, expect } from 'vitest';
+import { tick } from 'svelte';
 
 import Calculator from '$lib/components/calculator/Calculator.svelte';
 
+const initialCalculationResult = async () => {
+  render(Calculator);
+
+  const daysInput = '2';
+  const hoursInput = '6';
+
+  const daysInputField = screen.getByLabelText('Days');
+  const hoursInputField = screen.getByLabelText('Hours');
+
+  fireEvent.input(daysInputField, { target: { value: daysInput } });
+  fireEvent.input(hoursInputField, { target: { value: hoursInput } });
+  await tick();
+}
+
 describe('Calculator', () => {
+  test('should show result if calculate button is clicked', async () => {
+    render(Calculator);
 
-  // test('calculate button should be initially disabled', () => {
-  //   render(Calculator, { store: mockStore});
+    const calculateButton = screen.getByText('Calculate');
 
-  //   const calculatorButton = screen.queryByText('Calculate');
+    await fireEvent.click(calculateButton);
 
-  //   expect(calculatorButton.classList).toContain('btn--disabled');
-  // });
+    const resultText = screen.getByText('0 GB');
 
-  test('calculate button should become active on form input', () => {
+    expect(resultText).toBeInTheDocument();
+  });
+});
 
+describe('Calculator button', () => {
+  test('should be disabled on component render', () => {
+    render(Calculator);
+
+    const calculateButton = screen.getByText('Calculate');
+    expect(calculateButton.classList).toContain('btn--disabled');
   });
 
-  test('calculate button should become disabled if form input is emptied', () => {
+  test('should become active on form input', async () => {
+    await initialCalculationResult();
 
+    const calculateButton = screen.getByText('Calculate');
+    expect(calculateButton.classList).not.toContain('btn--disabled');
   });
 
-  test('should show result if calculator button is clicked', () => {
+  test('should become disabled if form input is emptied', async () => {
+    await initialCalculationResult();
 
-  });
+    const daysInputField = screen.getByLabelText('Days');
+    const hoursInputField = screen.getByLabelText('Hours');
 
-  test('should recalculate result if value is changed', () => {
+    fireEvent.input(daysInputField, { target: { value: '' } });
+    fireEvent.input(hoursInputField, { target: { value: '' } });
+    await tick();
 
-  });
-
-  test('should restart the calculator if restart is clicked', () => {
-
+    const calculateButton = screen.getByText('Calculate');
+    expect(calculateButton.classList).toContain('btn--disabled');
   });
 });

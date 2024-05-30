@@ -1,4 +1,4 @@
-import { render, fireEvent, screen } from '@testing-library/svelte';
+import { render, fireEvent, userEvent, screen } from '@testing-library/svelte';
 import { expect, test, describe } from 'vitest';
 import { tick } from 'svelte';
 
@@ -50,7 +50,55 @@ describe('Page', () => {
 
     calculatorTitle = screen.getByText('How much time you would like to listen for? I will tell you how much mobile data you need.');
     expect(calculatorTitle).toBeInTheDocument();
-  })
+  });
+
+  test('calculate button should be initially disabled', async () => {
+    render(Page);
+
+    const firstAudioQualityButton = screen.getByText('Low');
+    const firstCalculatorTypeButton = screen.getByText('Calculate Time');
+
+    fireEvent.click(firstAudioQualityButton);
+    await tick();
+
+    fireEvent.click(firstCalculatorTypeButton);
+    await tick();
+
+    const calculatorButton = screen.queryByText('Calculate');
+
+    expect(calculatorButton.classList).toContain('btn--disabled');
+  });
+
+  test('should calculate the correct amount of data needed to listen for specified time', async () => {
+    // Render the component
+    render(Page);
+
+    const daysInput = '2';
+    const hoursInput = '6';
+    const expectedDataUsageGB = '1';
+
+    const firstAudioQualityButton = screen.getByText('Low');
+    const firstCalculatorTypeButton = screen.getByText('Calculate Data');
+
+    fireEvent.click(firstAudioQualityButton);
+    await tick();
+
+    fireEvent.click(firstCalculatorTypeButton);
+    await tick();
+
+    const daysInputField = screen.getByLabelText('Days');
+    const hoursInputField = screen.getByLabelText('Hours');
+
+    await fireEvent.input(daysInputField, { target: { value: daysInput } });
+    await fireEvent.input(hoursInputField, { target: { value: hoursInput } });
+
+    const calculateButton = screen.getByText('Calculate');
+    await fireEvent.click(calculateButton);
+
+    const resultElement = screen.getByText(`${expectedDataUsageGB} GB`);
+
+    expect(resultElement).toBeInTheDocument();
+  });
 
   test('should reset form values if calculator type is changed', () => {});
 

@@ -1,32 +1,60 @@
-import { render } from '@testing-library/svelte';
-import { expect, test, describe, vi } from 'vitest';
+import { render } from '@testing-library/svelte'
+import { expect, describe, test } from 'vitest'
+
 import CalculateData from '$lib/components/calculator/CalculateData.svelte';
 
-// const mockStore = {
-//   selectedAudioQuality: 96,
-//   subscribe: vi.fn(),
-// };
-
-describe('Calculate data', () => {
-  // test('should calculate the correct data usage in GB', () => {
-  //   const { component } = render(CalculateData, { store: mockStore });
-
-  //   const input = {
-  //     days: '2',
-  //     hours: '3',
-  //   };
-
-  //   const result = component.calculateTime(input);
-  //   const expected = 3;
-  //   expect(result).toEqual(expected);
-  // });
-
+describe('CalculateData', () => {
   test('should convert days and hours to total hours correctly', () => {
+  const { component } = render(CalculateData);
+
+   const result = component.convertInputToHours(1, 12);
+   const expected = 36;
+
+   expect(result).toEqual(expected);
+  });
+
+  test('should convert total hours to seconds correctly', () => {
     const { component } = render(CalculateData);
 
-    const result = component.convertToHours(2, 3);
-    const expected = 51; // Expected result: 2 days * 24 hours/day + 3 hours = 51 hours
+    const result = component.convertHoursToSeconds(36);
+    const expected = 129600;
 
     expect(result).toEqual(expected);
-  });
+   });
+
+   test('should convert bitrate to bits per second correctly', () => {
+    const { component } = render(CalculateData);
+
+    const result = component.convertBitrateToBps(24);
+    const expected = 24000;
+
+    expect(result).toEqual(expected);
+   });
+
+   test('should calculate data usage in MB', () => {
+    const { component } = render(CalculateData);
+
+    const result = component.calculateDataUsageInMb(129600, 24000);
+    const expected = 370.78857421875;
+
+    expect(result).toEqual(expected);
+   });
+
+   test('convert MB to GB and return whole number', () => {
+    const { component } = render(CalculateData);
+
+    const result = component.convertDataMbToGb(370.78857421875);
+    const expected = 1;
+
+    expect(result).toEqual(expected);
+   });
+
+  //  test('should calculate data needed correctly', () => {
+  //   const { component } = render(CalculateData);
+
+  //   const expectedDataUsageGB = 1;
+  //   const actualDataUsageGB = component.calculateDataNeeded({ days: '1', hours:'12' });
+
+  //   expect(actualDataUsageGB).toBe(expectedDataUsageGB);
+  // });
 });

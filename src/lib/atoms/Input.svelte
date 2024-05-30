@@ -23,6 +23,7 @@
 	<label class="input__label" for={fieldLabel}>{fieldName}</label>
 	<input
     class="input__text"
+    id={fieldLabel}
     name={fieldLabel}
     type="number"
     min="0"

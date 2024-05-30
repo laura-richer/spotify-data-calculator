@@ -22,6 +22,15 @@ store.subscribe((value) => {
 // Methods
 const handleInputChange = (event: CustomEvent<{value: string, fieldLabel: string}>) => calculationInput = event.detail.value;
 
+export const convertDataGbToBits = (data: number):number => data * 1024 * 1024 * 1024 * 8;
+export const calculateSecondsFromBits = (bits: number, audioQuality: number):number => bits / (audioQuality * 1000);
+
+export const convertSecondsToDaysAndHours = (seconds: number):Duration => {
+  const days = Math.floor(seconds / (3600 * 24));
+  const hours = Math.floor((seconds % (3600 * 24)) / 3600);
+  return { days, hours };
+};
+
 export const pluralize = (value: number, unit: string):string => value === 1 ? unit : unit + "s";
 
 export const formatDuration = (duration: Duration):string => {
@@ -32,25 +41,17 @@ export const formatDuration = (duration: Duration):string => {
   return daysText + hoursText;
 }
 
-export const calculateData = (input: string):string => {
-  // Convert data from gigabytes to bits
-  const dataBits = Number(input) * 1024 * 1024 * 1024 * 8;
-
-  // Calculate duration in seconds
-  const durationSeconds = dataBits / (selectedAudioQuality * 1000);
-
-  // Convert duration from seconds to days and hours
-  const durationDays = Math.floor(durationSeconds / (3600 * 24));
-  const durationHours = Math.floor((durationSeconds % (3600 * 24)) / 3600);
-
-  // Format the text to output from the calculator
-  const durationText = formatDuration({ days: durationDays, hours: durationHours });
+export const calculateDataNeeded = (input: string):string => {
+  const dataBits = convertDataGbToBits(Number(input));
+  const durationSeconds = calculateSecondsFromBits(dataBits, selectedAudioQuality);
+  const durationDaysAndHours = convertSecondsToDaysAndHours(durationSeconds);
+  const durationText = formatDuration(durationDaysAndHours);
 
   return durationText;
 };
 
 const handleCalculation = (input: string):void => {
-  const resultValue = calculateData(input);
+  const resultValue = calculateDataNeeded(input);
   setResult(resultValue);
   setResultTitle('You can listen for...');
 };

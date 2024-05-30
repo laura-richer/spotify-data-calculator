@@ -1,11 +1,17 @@
-import { render } from '@testing-library/svelte';
-import { test, describe} from 'vitest';
+import { render, screen, userEvent } from '@testing-library/svelte';
+import { test, describe, expect, vi } from 'vitest';
+
 import Calculator from '$lib/components/calculator/Calculator.svelte';
 
 describe('Calculator', () => {
-  test('calculate button should be initially disabled', () => {
 
-  });
+  // test('calculate button should be initially disabled', () => {
+  //   render(Calculator, { store: mockStore});
+
+  //   const calculatorButton = screen.queryByText('Calculate');
+
+  //   expect(calculatorButton.classList).toContain('btn--disabled');
+  // });
 
   test('calculate button should become active on form input', () => {
 

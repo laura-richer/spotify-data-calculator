@@ -27,17 +27,26 @@ describe('Calculate time', () => {
   test('should pluralise values if required', () => {
     const { component } = render(CalculateTime);
 
-    const pluraliseResult = component.pluralize(2, 'day');
-    const expected = 'days'
-    expect(pluraliseResult).toEqual(expected);
+    const pluraliseDays = component.pluralize(2, 'day');
+    const pluraliseHours = component.pluralize(2, 'hour');
+
+    const expectedDays = 'days'
+    const expectedHours = 'hours'
+
+    expect(pluraliseDays).toEqual(expectedDays);
+    expect(pluraliseHours).toEqual(expectedHours);
   });
 
   test('should not pluralise values if value is 1', () => {
     const { component } = render(CalculateTime);
 
-    const pluraliseResult =
-     component.pluralize(1, 'day');
-    const expected = 'day'
-    expect(pluraliseResult).toEqual(expected);
+    const pluraliseDays = component.pluralize(1, 'day');
+    const pluraliseHours = component.pluralize(1, 'hour');
+
+    const expectedDays = 'day';
+    const expectedHours = 'hour';
+
+    expect(pluraliseDays).toEqual(expectedDays);
+    expect(pluraliseHours).toEqual(expectedHours);
   });
 });

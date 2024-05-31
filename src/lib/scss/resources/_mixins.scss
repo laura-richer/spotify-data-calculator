@@ -1,13 +1,13 @@
 @use 'sass:math';
 
 @mixin border-inset() {
-  border-style: solid;
-  border-color: var(--color-shadow) var(--color-highlight) var(--color-highlight)
-    var(--color-shadow);
+	border-style: solid;
+	border-color: var(--color-shadow) var(--color-highlight) var(--color-highlight)
+		var(--color-shadow);
 }
 
 @mixin border-outset() {
-  border-style: solid;
-  border-color: var(--color-highlight) var(--color-shadow) var(--color-shadow)
-    var(--color-highlight);
+	border-style: solid;
+	border-color: var(--color-highlight) var(--color-shadow) var(--color-shadow)
+		var(--color-highlight);
 }

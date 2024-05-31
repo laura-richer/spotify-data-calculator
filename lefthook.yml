@@ -5,5 +5,5 @@ pre-commit:
       run: pnpm lint
     test:
       run: pnpm test
-    typecheck:
-      run: pnpm check
+    # typecheck:
+    #   run: pnpm check

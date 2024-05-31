@@ -1,17 +1,17 @@
 <script lang="ts">
-import Calculator from '$lib/components/calculator/Calculator.svelte';
-import Header from '$lib/components/Header.svelte';
-import SelectCalculatorType from '$lib/components/SelectCalculatorType.svelte';
-import SelectAudioQuality from '$lib/components/SelectAudioQuality.svelte';
+	import Calculator from '$lib/components/calculator/Calculator.svelte';
+	import Header from '$lib/components/Header.svelte';
+	import SelectCalculatorType from '$lib/components/SelectCalculatorType.svelte';
+	import SelectAudioQuality from '$lib/components/SelectAudioQuality.svelte';
 
-import { store } from '$lib/store';
-import '$lib/scss/global.scss';
+	import { store } from '$lib/store';
+	import '$lib/scss/global.scss';
 
-let selectedCalculatorType: string;
+	let selectedCalculatorType: string;
 
-store.subscribe((value) => {
-  selectedCalculatorType = value.calculatorType;
-});
+	store.subscribe((value) => {
+		selectedCalculatorType = value.calculatorType;
+	});
 </script>
 
 <div class="main">
@@ -19,48 +19,47 @@ store.subscribe((value) => {
 		<Header />
 		<div class="main__container">
 			<div class="main__block">
-      <SelectAudioQuality />
+				<SelectAudioQuality />
 			</div>
 
-      <div class="main__block">
-        <SelectCalculatorType />
+			<div class="main__block">
+				<SelectCalculatorType />
 			</div>
-      {#if selectedCalculatorType}
-        <Calculator />
+			{#if selectedCalculatorType}
+				<Calculator />
 			{/if}
 		</div>
 	</div>
 </div>
 
 <style lang="scss">
-  @use 'sass:math';
-  @import '../lib/scss/resources';
+	@use 'sass:math';
+	@import '../lib/scss/resources';
 
-  .main {
-    display: flex;
-    min-height: 100%;
-    background-color: var(--color-grey);
+	.main {
+		display: flex;
+		min-height: 100%;
+		background-color: var(--color-grey);
 
-    &__wrapper {
-      display: flex;
-      width: 450px;
-      max-width: 90%;
-      flex-direction: column;
-      justify-content: center;
-      margin: calc($spacer * 2) auto;
-    }
+		&__wrapper {
+			display: flex;
+			width: 450px;
+			max-width: 90%;
+			flex-direction: column;
+			justify-content: center;
+			margin: calc($spacer * 2) auto;
+		}
 
-    &__container {
-      @include border-inset;
+		&__container {
+			@include border-inset;
 
+			padding: $spacer * 2;
+			border-width: math.div($spacer, 2);
+			background: url(../lib/assets/images/sweeper-grid.png) top left;
+		}
 
-      padding: $spacer * 2;
-      border-width: math.div($spacer, 2);
-      background: url(../lib/assets/images/sweeper-grid.png) top left;
-    }
-
-    &__block {
-      margin-bottom: $spacer * 4;
-    }
-  }
-  </style>
+		&__block {
+			margin-bottom: $spacer * 4;
+		}
+	}
+</style>

@@ -1,23 +1,23 @@
 @font-face {
-  font-family: Minesweeper;
-  src: url(../assets/fonts/mine-sweeper.otf);
+	font-family: Minesweeper;
+	src: url(../assets/fonts/mine-sweeper.otf);
 }
 
 h1 {
-  margin: 0;
-  font-size: 1.6rem;
-  line-height: 2rem;
+	margin: 0;
+	font-size: 1.6rem;
+	line-height: 2rem;
 }
 
 p {
-  margin: 0 0 $spacer;
-  font-size: 1.2rem;
+	margin: 0 0 $spacer;
+	font-size: 1.2rem;
 
-  &:last-child {
-    margin-bottom: 0;
-  }
+	&:last-child {
+		margin-bottom: 0;
+	}
 }
 
 .small {
-  font-size: 1rem;
+	font-size: 1rem;
 }

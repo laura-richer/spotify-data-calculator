@@ -30,9 +30,40 @@ describe('Input', () => {
   //   expect(renderedFieldLabel.for).toBe(fieldLabel);
   // });
 
-  test('should render label in correct position', () => {});
+  test('should render label in correct position', () => {
+    const fieldLabelPosition = 'left';
+    const { container } = render(Input, {
+      props: {
+        fieldLabelPosition
+      }
+    });
 
-  test('should emit input on value change', () => {});
+    const input = container.querySelectorAll('.input');
+    screen.debug();
+    expect(input[0].classList).toContain('input--left');
+  });
 
-  test('should empty field and emit on focus', () => {});
+  // test('should emit input on value change', async () => {
+  //   const onValueChange = vi.fn();
+
+  //   const { component, container } = render(Input);
+  //   component.$on('input', onValueChange);
+
+  //   const input = container.querySelector('input');
+  //   await fireEvent.input(input, { target: { value: '1' } });
+
+  //   expect(onValueChange).toHaveBeenCalledOnce();
+  // });
+
+  // test('should empty field and emit on focus', async () => {
+  //   const onFieldFocus = vi.fn();
+
+  //   const { component, container } = render(Input);
+
+  //   const input = container.querySelector('input');
+  //   component.input.$on('focus', onFieldFocus);
+  //   await fireEvent.focus(input);
+
+  //   expect(onFieldFocus).toHaveBeenCalledOnce();
+  // });
 });

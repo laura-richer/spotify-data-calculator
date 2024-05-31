@@ -12,8 +12,8 @@
 	let fieldValue = fieldDefaultValue;
 
   // Methods
-  const onValueChange = (value: string):boolean => dispatch('inputChange', {value, fieldLabel});
-  const onFieldFocus = ():void => {
+  export const onValueChange = (value: string):boolean => dispatch('inputChange', {value, fieldLabel});
+  export const onFieldFocus = ():void => {
     fieldValue = '';
     dispatch('inputChange', {value: fieldValue, fieldLabel})
   };

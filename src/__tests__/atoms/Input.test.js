@@ -39,7 +39,6 @@ describe('Input', () => {
 		});
 
 		const input = container.querySelectorAll('.input');
-		screen.debug();
 		expect(input[0].classList).toContain('input--left');
 	});
 

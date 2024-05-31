@@ -3,8 +3,8 @@ import { expect, test, describe } from 'vitest';
 
 import CalculatorTitle from '$lib/components/calculator/CalculatorTitle.svelte';
 
-describe('CalculatorTitle', () => {
-  test('should render the title', () => {
+describe('Calculator title', () => {
+  test('should render the calculator title', () => {
     const { container } = render(CalculatorTitle, {
       props: {
         title: 'Calculator Title',

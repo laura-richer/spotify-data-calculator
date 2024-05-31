@@ -1,10 +1,10 @@
 import { render } from '@testing-library/svelte';
 import { expect, test, describe } from 'vitest';
 
-import Button from '$lib/atoms/Button.svelte'
+import Button from '$lib/atoms/Button.svelte';
 
 describe('Button', () => {
-  test('button displays text text', () => {
+  test('should display text', () => {
     const buttonText = 'Click me';
     const { container } = render(Button, {
       props: {
@@ -16,7 +16,7 @@ describe('Button', () => {
     expect(button.innerHTML).toBe('Click me')
   });
 
-  test('button has correct type', () => {
+  test('should have correct type', () => {
     const buttonType = 'primary';
     const { container } = render(Button, {
       props: {
@@ -28,7 +28,7 @@ describe('Button', () => {
     expect(button.classList).toContain('btn--primary')
   });
 
-  test('button is disabled if disabled prop is true', () => {
+  test('should be disabled if disabled prop is true', () => {
     const buttonDisabled = true;
     const { container } = render(Button, {
       props: {
@@ -40,7 +40,7 @@ describe('Button', () => {
     expect(button.classList).toContain('btn--disabled')
   });
 
-  test('button has active class added if selected prop is true', () => {
+  test('should have active class added if selected prop is true', () => {
     const buttonSelected = true;
     const { container } = render(Button, {
       props: {

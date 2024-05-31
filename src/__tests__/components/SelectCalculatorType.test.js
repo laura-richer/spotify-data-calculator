@@ -5,7 +5,7 @@ import { calculatorTypes } from '$lib/constants/calculator-types.js';
 import SelectedCalculatorType from '$lib/components/SelectCalculatorType.svelte';
 
 describe('Select calculator type', () => {
-  test('renders a button for each calculator type', () => {
+  test('should render a button for each calculator type', () => {
     const { container } = render(SelectedCalculatorType);
 
     const calculatorTypeButtons = container.querySelectorAll('button');

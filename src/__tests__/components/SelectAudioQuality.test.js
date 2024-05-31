@@ -5,7 +5,7 @@ import { audioQualities } from '$lib/constants/audio-qualities.js';
 import SelectAudioQuality from '$lib/components/SelectAudioQuality.svelte';
 
 describe('Select audio quality', () => {
-  test('renders a button for each audio quality', () => {
+  test('should render a button for each audio quality', () => {
    const { container } = render(SelectAudioQuality);
    const audioQualityButtons = container.querySelectorAll('button');
 

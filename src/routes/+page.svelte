@@ -19,7 +19,7 @@ store.subscribe((value) => {
 		<Header />
 		<div class="main__container">
 			<div class="main__block">
-				<SelectAudioQuality />
+      <SelectAudioQuality />
 			</div>
 
       <div class="main__block">

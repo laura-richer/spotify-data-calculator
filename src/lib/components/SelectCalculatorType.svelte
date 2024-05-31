@@ -1,10 +1,7 @@
 <script lang="ts">
+import { calculatorTypes } from '$lib/constants/calculator-types.js';
 import Button from '$lib/atoms/Button.svelte';
-
 import { resetResult, setCalculatorType, store } from '$lib/store';
-
-// Variables
-const calculatorTypes = ['Time', 'Data'];
 
 let selectedCalculatorType: string;
 
@@ -28,7 +25,7 @@ const handleSelectCalculatorType = (type: string):void => {
       on:click={() => handleSelectCalculatorType(type)}
       buttonHoverColor="green"
       buttonText={`Calculate ${type}`}
-      active={type === selectedCalculatorType}
+      buttonSelected={type === selectedCalculatorType}
     />
   {/each}
 </div>

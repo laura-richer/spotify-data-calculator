@@ -12,8 +12,8 @@
 	let fieldValue = fieldDefaultValue;
 
   // Methods
-  const onValueChange = (value: string):boolean => dispatch('inputChange', {value, fieldLabel});
-  const onFieldFocus = ():void => {
+  export const onValueChange = (value: string):boolean => dispatch('inputChange', {value, fieldLabel});
+  export const onFieldFocus = ():void => {
     fieldValue = '';
     dispatch('inputChange', {value: fieldValue, fieldLabel})
   };
@@ -23,6 +23,7 @@
 	<label class="input__label" for={fieldLabel}>{fieldName}</label>
 	<input
     class="input__text"
+    id={fieldLabel}
     name={fieldLabel}
     type="number"
     min="0"

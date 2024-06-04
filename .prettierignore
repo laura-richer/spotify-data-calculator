@@ -6,3 +6,4 @@ yarn.lock
 **/.svelte-kit/
 /.svelte-kit
 /coverage
+tsconfig.json
